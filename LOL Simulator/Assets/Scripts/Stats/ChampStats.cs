@@ -31,7 +31,8 @@ public class ChampStats : MonoBehaviour
     public List<SpellInfo> spellInfo = new List<SpellInfo>();
     public bool qReady = true, wReady = true, eReady = true, rReady = true, passiveReady = true;
     public float qCD, wCD, eCD, rCD, pCD;
-    public TextMeshProUGUI[] outputStats;
+    [HideInInspector] public TextMeshProUGUI[] outputStats;
+    public TextMeshProUGUI[] outputStats1;
     [HideInInspector] public List<Item> item;
     [HideInInspector] public GameObject itemList;
     [HideInInspector] public GameObject itemPrefab;
@@ -167,7 +168,9 @@ public class ChampStats : MonoBehaviour
             {
                 int totalDamage = (int)Mathf.Round((eSkill.damage.flatAD[4] + (AD * (eSkill.damage.percentAD[4] / 100))));
                 totalDamage = (int)Mathf.Round(totalDamage * (100 / (100 + currentTarget.gameObject.GetComponent<ChampStats>().armor)));
-                eSkill.UseSkill(4, this, currentTarget.gameObject.GetComponent<ChampStats>());
+                int _prev = int.Parse(this.gameObject.GetComponent<ChampCombat>().abilitySum[3].text);
+                TextMeshProUGUI s = this.gameObject.GetComponent<ChampCombat>().abilitySum[3];
+                eSkill.UseSkill(4, this, currentTarget.gameObject.GetComponent<ChampStats>(),s,_prev);
                 dynamicStatus.Remove("Counter Strike");
                 dynamicStatusStacks.Remove("Counter Strike");
                 dynamicStatusDuration.Remove("Counter Strike");
@@ -427,15 +430,33 @@ public class ChampStats : MonoBehaviour
     public void UpdateStats()
     {
         this.gameObject.name = name;
+        outputStats1[0].text = name;
+        outputStats1[1].text = level.ToString("F0");
+        outputStats1[2].text = maxHealth.ToString("F0");
+        outputStats1[3].text = currentHealth.ToString("F0");
+        string s = "";
+        int i = 0;
+        foreach (string item in champCombat.combatPriority)
+        {
+            i++;
+            if (i == champCombat.combatPriority.Length)
+            {
+                s += item;
+            }
+            else
+            {
+                s += item + ",";
+            }
+        }
+        outputStats1[4].text = s;
         outputStats[0].text = name;
         outputStats[1].text = level.ToString("F0");
         outputStats[2].text = maxHealth.ToString("F0");
-        outputStats[3].text = currentHealth.ToString("F0");
-        outputStats[4].text = AD.ToString("F0");
-        outputStats[5].text = AP.ToString("F0");
-        outputStats[6].text = armor.ToString("F0");
-        outputStats[7].text = spellBlock.ToString("F0");
-        outputStats[8].text = attackSpeed.ToString("F2");
+        outputStats[3].text = AD.ToString("F0");
+        outputStats[4].text = AP.ToString("F0");
+        outputStats[5].text = armor.ToString("F0");
+        outputStats[6].text = spellBlock.ToString("F0");
+        outputStats[7].text = attackSpeed.ToString("F2");
     }
 
     void GetTarget()

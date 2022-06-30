@@ -35,6 +35,8 @@ public class SimManager : MonoBehaviour
     public GameObject sliderGO;
     public GameObject sliderParent;
     //public GameObject
+    public GameObject[] champOutput;
+    public GameObject[] champOutput1;
 
     RiotAPIItemRequest itemRequest;
     RiotAPIItemResponse itemResponse;    
@@ -130,6 +132,10 @@ public class SimManager : MonoBehaviour
         itemRequest = GetComponent<RiotAPIItemRequest>();
         matchRequest = GetComponent<RiotAPIMatchRequest>();
         apiRequest = GetComponent<RiotAPIRequest>();
+        foreach (GameObject item in champOutput)
+        {
+            item.SetActive(false);
+        }
     }
 
     public void ShowMatches(int num)
@@ -168,6 +174,14 @@ public class SimManager : MonoBehaviour
         loadBtn.interactable = false;
         resetBtn.interactable = true;
         battleStarted = true;
+        foreach (GameObject item in champOutput)
+        {
+            item.SetActive(true);
+        }
+        foreach (GameObject item in champOutput1)
+        {
+            item.SetActive(false);
+        }
         //isNew = false;
     }
 
@@ -184,6 +198,7 @@ public class SimManager : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
         isLoaded = false;
         battleStarted = false;
+        timer = 0;
         RiotAPIMatchRequest.selectedChamp[0] = 0;
         RiotAPIMatchRequest.selectedChamp[1] = 0;
     }
