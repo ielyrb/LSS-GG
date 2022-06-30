@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54892e021f4682478dc5895e98fd5d3, type: 3}
-  m_Name: Zed Q
+  m_Name: Ziggs R
   m_EditorClassIdentifier: 
   basic:
-    champion: Zed
-    name: Razor Shuriken
-    castTime: 0.25
+    champion: Ziggs
+    name: Mega Inferno Bomb
+    castTime: 0.375
     inactive: 0
     coolDown:
-    - 6
-    - 6
-    - 6
-    - 6
-    - 6
-    cost:
-    - 75
+    - 120
+    - 95
     - 70
-    - 65
-    - 60
-    - 55
+    - 0
+    - 0
+    cost:
+    - 100
+    - 100
+    - 100
+    - 0
+    - 0
     hpCost:
     - 0
     - 0
     - 0
     - 0
     - 0
-  skillType: 0
-  skillDamageType: 0
+  skillType: 1
+  skillDamageType: 1
   multihit:
     multiHit: 0
     hits: 0000000000000000000000000000000000000000
@@ -53,17 +53,17 @@ MonoBehaviour:
     - 0
   damage:
     flatAD:
-    - 80
-    - 115
-    - 150
-    - 185
-    - 220
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     bonusAD:
-    - 110
-    - 110
-    - 110
-    - 110
-    - 110
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     percentAD:
     - 0
     - 0
@@ -71,9 +71,9 @@ MonoBehaviour:
     - 0
     - 0
     flatAP:
-    - 0
-    - 0
-    - 0
+    - 200
+    - 300
+    - 400
     - 0
     - 0
     bonusAP:
@@ -83,9 +83,9 @@ MonoBehaviour:
     - 0
     - 0
     percentAP:
-    - 0
-    - 0
-    - 0
+    - 73.33
+    - 73.33
+    - 73.33
     - 0
     - 0
   trueDamage:
@@ -187,7 +187,12 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    ASIncreaseDuration: []
+    ASIncreaseDuration:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     MSIncrease: 0
     MSIncreaseFlat:
     - 0
@@ -201,7 +206,12 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    MSIncreaseDuration: []
+    MSIncreaseDuration:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     DamageRed: 0
     DamageRedFlat:
     - 0
