@@ -45,7 +45,7 @@ public class SkillList : ScriptableObject
     }
     #endregion
 
-    public int UseSkill(int level, ChampStats myStats, ChampStats target, TextMeshProUGUI text, int prevDamage)
+    public int UseSkill(int level, ChampStats myStats, ChampStats target)
     {
         output = GameObject.FindGameObjectWithTag("Output Content").GetComponent<TextMeshProUGUI>();
         int totalDamage = 0;
@@ -269,7 +269,6 @@ public class SkillList : ScriptableObject
 
         SelfEffects(level, myStats);
         EnemyEffects(level,target);
-        text.text = (prevDamage + totalDamage).ToString();
         return totalDamage;
     }
 
