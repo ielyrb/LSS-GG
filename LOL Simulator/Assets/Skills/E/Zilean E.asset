@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54892e021f4682478dc5895e98fd5d3, type: 3}
-  m_Name: Zed Q
+  m_Name: Zilean E
   m_EditorClassIdentifier: 
   basic:
-    champion: Zed
-    name: Razor Shuriken
-    castTime: 0.25
+    champion: Zilean
+    name: Time Warp
+    castTime: 0
     inactive: 0
     coolDown:
-    - 6
-    - 6
-    - 6
-    - 6
-    - 6
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     cost:
-    - 75
-    - 70
-    - 65
-    - 60
-    - 55
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     hpCost:
     - 0
     - 0
@@ -53,17 +53,17 @@ MonoBehaviour:
     - 0
   damage:
     flatAD:
-    - 80
-    - 115
-    - 150
-    - 185
-    - 220
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     bonusAD:
-    - 110
-    - 110
-    - 110
-    - 110
-    - 110
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     percentAD:
     - 0
     - 0
@@ -163,8 +163,8 @@ MonoBehaviour:
     MSIncreaseDuration: 0
     ASSlow: 0
     ASSlowDuration: 0
-    MSSlow: 0
-    MSSlowDuration: 0
+    MSSlow: 1
+    MSSlowDuration: 2.5
     Invincible: 0
     InvincibleDuration: 0
   selfEffects:
@@ -187,8 +187,13 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    ASIncreaseDuration: []
-    MSIncrease: 0
+    ASIncreaseDuration:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    MSIncrease: 1
     MSIncreaseFlat:
     - 0
     - 0
@@ -196,12 +201,17 @@ MonoBehaviour:
     - 0
     - 0
     MSIncreasePercent:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
-    MSIncreaseDuration: []
+    - 40
+    - 55
+    - 70
+    - 85
+    - 99
+    MSIncreaseDuration:
+    - 2.5
+    - 2.5
+    - 2.5
+    - 2.5
+    - 2.5
     DamageRed: 0
     DamageRedFlat:
     - 0

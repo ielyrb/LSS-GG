@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b54892e021f4682478dc5895e98fd5d3, type: 3}
-  m_Name: Zed Q
+  m_Name: Ziggs E
   m_EditorClassIdentifier: 
   basic:
-    champion: Zed
-    name: Razor Shuriken
+    champion: Ziggs
+    name: Hexplosive Minefield
     castTime: 0.25
     inactive: 0
     coolDown:
-    - 6
-    - 6
-    - 6
-    - 6
-    - 6
+    - 16
+    - 16
+    - 16
+    - 16
+    - 16
     cost:
-    - 75
     - 70
-    - 65
-    - 60
-    - 55
+    - 80
+    - 90
+    - 100
+    - 110
     hpCost:
     - 0
     - 0
@@ -36,7 +36,7 @@ MonoBehaviour:
     - 0
     - 0
   skillType: 0
-  skillDamageType: 0
+  skillDamageType: 1
   multihit:
     multiHit: 0
     hits: 0000000000000000000000000000000000000000
@@ -53,17 +53,17 @@ MonoBehaviour:
     - 0
   damage:
     flatAD:
-    - 80
-    - 115
-    - 150
-    - 185
-    - 220
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     bonusAD:
-    - 110
-    - 110
-    - 110
-    - 110
-    - 110
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     percentAD:
     - 0
     - 0
@@ -71,11 +71,11 @@ MonoBehaviour:
     - 0
     - 0
     flatAP:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 30
+    - 70
+    - 110
+    - 150
+    - 190
     bonusAP:
     - 0
     - 0
@@ -83,11 +83,11 @@ MonoBehaviour:
     - 0
     - 0
     percentAP:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 30
+    - 30
+    - 30
+    - 30
+    - 30
   trueDamage:
     TDType: 0
     flat:
@@ -187,7 +187,12 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    ASIncreaseDuration: []
+    ASIncreaseDuration:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     MSIncrease: 0
     MSIncreaseFlat:
     - 0
@@ -201,7 +206,12 @@ MonoBehaviour:
     - 0
     - 0
     - 0
-    MSIncreaseDuration: []
+    MSIncreaseDuration:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     DamageRed: 0
     DamageRedFlat:
     - 0
