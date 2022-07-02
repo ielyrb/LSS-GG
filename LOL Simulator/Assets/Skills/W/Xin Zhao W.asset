@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basic:
     champion: Xin Zhao
-    name: 
-    castTime: 0
+    name: Wind Becomes Lightning
+    castTime: 0.5
     inactive: 0
     coolDown:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 12
+    - 11
+    - 10
+    - 9
+    - 8
     cost:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 60
+    - 55
+    - 50
+    - 45
+    - 40
     hpCost:
     - 0
     - 0
@@ -53,11 +53,11 @@ MonoBehaviour:
     - 0
   damage:
     flatAD:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 80
+    - 125
+    - 170
+    - 215
+    - 260
     bonusAD:
     - 0
     - 0
@@ -65,11 +65,11 @@ MonoBehaviour:
     - 0
     - 0
     percentAD:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 120
+    - 120
+    - 120
+    - 120
+    - 120
     flatAP:
     - 0
     - 0
@@ -83,11 +83,11 @@ MonoBehaviour:
     - 0
     - 0
     percentAP:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 65
+    - 65
+    - 65
+    - 65
+    - 65
   trueDamage:
     TDType: 0
     flat:

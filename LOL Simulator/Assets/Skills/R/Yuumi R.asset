@@ -36,7 +36,7 @@ MonoBehaviour:
     - 0
     - 0
   skillType: 1
-  skillDamageType: 0
+  skillDamageType: 1
   multihit:
     multiHit: 0
     hits: 0000000000000000000000000000000000000000
@@ -71,9 +71,9 @@ MonoBehaviour:
     - 0
     - 0
     flatAP:
-    - 60
-    - 80
-    - 100
+    - 240
+    - 320
+    - 400
     - 0
     - 0
     bonusAP:
@@ -83,9 +83,9 @@ MonoBehaviour:
     - 0
     - 0
     percentAP:
-    - 20
-    - 20
-    - 20
+    - 80
+    - 80
+    - 80
     - 0
     - 0
   trueDamage:

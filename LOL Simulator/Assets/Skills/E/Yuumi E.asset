@@ -174,7 +174,7 @@ MonoBehaviour:
     silenceDuration: 0
     disarm: 0
     disarmDuration: 0
-    ASIncrease: 0
+    ASIncrease: 1
     ASIncreaseFlat:
     - 0
     - 0
@@ -182,17 +182,17 @@ MonoBehaviour:
     - 0
     - 0
     ASIncreasePercent:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 25
+    - 30
+    - 35
+    - 40
+    - 45
     ASIncreaseDuration:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 3
+    - 3
+    - 3
+    - 3
+    - 3
     MSIncrease: 0
     MSIncreaseFlat:
     - 0

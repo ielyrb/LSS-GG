@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basic:
     champion: Xin Zhao
-    name: 
+    name: Three Talon Strike
     castTime: 0
     inactive: 0
     coolDown:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 7
+    - 6.5
+    - 6
+    - 5.5
+    - 5
     cost:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 30
+    - 30
+    - 30
+    - 30
+    - 30
     hpCost:
     - 0
     - 0
@@ -53,17 +53,17 @@ MonoBehaviour:
     - 0
   damage:
     flatAD:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 48
+    - 75
+    - 102
+    - 129
+    - 156
     bonusAD:
-    - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 120
+    - 120
+    - 120
+    - 120
+    - 120
     percentAD:
     - 0
     - 0

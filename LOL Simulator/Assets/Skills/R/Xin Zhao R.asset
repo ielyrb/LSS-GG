@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basic:
     champion: Xin Zhao
-    name: 
-    castTime: 0
+    name: Crescent Guard
+    castTime: 0.35
     inactive: 0
     coolDown:
-    - 0
-    - 0
-    - 0
+    - 120
+    - 110
+    - 100
     - 0
     - 0
     cost:
-    - 0
-    - 0
-    - 0
+    - 100
+    - 100
+    - 100
     - 0
     - 0
     hpCost:
@@ -53,15 +53,15 @@ MonoBehaviour:
     - 0
   damage:
     flatAD:
-    - 0
-    - 0
-    - 0
+    - 75
+    - 175
+    - 275
     - 0
     - 0
     bonusAD:
-    - 0
-    - 0
-    - 0
+    - 100
+    - 100
+    - 100
     - 0
     - 0
     percentAD:
@@ -83,9 +83,9 @@ MonoBehaviour:
     - 0
     - 0
     percentAP:
-    - 0
-    - 0
-    - 0
+    - 110
+    - 110
+    - 110
     - 0
     - 0
   trueDamage:
@@ -141,14 +141,14 @@ MonoBehaviour:
     - 0
     - 0
     percentByMissingHealth:
-    - 0
-    - 0
-    - 0
+    - 15
+    - 15
+    - 15
     - 0
     - 0
   enemyEffects:
-    stun: 0
-    stunDuration: 0
+    stun: 1
+    stunDuration: 0.75
     silence: 0
     silenceDuration: 0
     disarm: 0
@@ -248,8 +248,8 @@ MonoBehaviour:
     ASSlowDuration: 0
     MSSlow: 0
     MSSlowDuration: 0
-    Invincible: 0
-    InvincibleDuration: 0
+    Invincible: 1
+    InvincibleDuration: 4
     ArmorBonus: 0
     ArmorFlat:
     - 0

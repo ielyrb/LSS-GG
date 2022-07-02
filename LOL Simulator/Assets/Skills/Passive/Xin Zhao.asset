@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Xin Zhao
   m_EditorClassIdentifier: 
   championName: Xin Zhao
-  skillName: 
+  skillName: Determination
   castTime: 0
   skillDamageType: 0
   coolDown: 0
   inactive: 0
-  levelScale: 0
+  levelScale: 1
   applyOnAttack: 0
   applyOnAbility: 0
   alwaysActive: 0
   minAD: 0
   maxAD: 0
-  percentMinAD: 0
-  percentMaxAD: 0
+  percentMinAD: 15
+  percentMaxAD: 45
   minAP: 0
   maxAP: 0
   percentMinAP: 0
@@ -34,8 +34,8 @@ MonoBehaviour:
   maxTD: 0
   percentMinTD: 0
   percentMaxTD: 0
-  minHeal: 0
-  maxHeal: 0
+  minHeal: 6
+  maxHeal: 74
   percentMinHeal: 0
   percentMaxHeal: 0
   percentMinTargetMissingHealth: 0
