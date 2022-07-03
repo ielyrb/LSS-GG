@@ -11921,6 +11921,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6a05f0d5a3070b45ba18b7a16a14893, type: 2}
   - {fileID: 11400000, guid: f0b069c8c952b3e49aaa48d23398ac36, type: 2}
   - {fileID: 11400000, guid: 95256721fa3401846b4e59ab54430118, type: 2}
+  - {fileID: 11400000, guid: 8791c27f9a346264d8bdebfc0f4a5f99, type: 2}
   qSkills:
   - {fileID: 11400000, guid: d4f25c56033acde4eb9fff580ebee399, type: 2}
   - {fileID: 11400000, guid: 050f9601f6054cc4ca2e3feaaf573f31, type: 2}
@@ -11934,6 +11935,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fd6c62494bfc35e478b07d2e02cfa790, type: 2}
   - {fileID: 11400000, guid: 793c850988f54af4e89fc46b7edf75a6, type: 2}
   - {fileID: 11400000, guid: e7ab36c791cb6f948843ad82af969747, type: 2}
+  - {fileID: 11400000, guid: 393624bab8ee2704c82db99a32feb023, type: 2}
   wSkills:
   - {fileID: 11400000, guid: 2376174f911ab094e8a63ed3b5c2bf5c, type: 2}
   - {fileID: 11400000, guid: 6be28f1b9d4e26149a75ea5d99b7c877, type: 2}
@@ -11947,6 +11949,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7e36a41abdb2c04ab924f68e29ac066, type: 2}
   - {fileID: 11400000, guid: a06365ab7e3996240b42f3dd581dc922, type: 2}
   - {fileID: 11400000, guid: f5dec1a14bef74a4eb1afb4ddbdd4f85, type: 2}
+  - {fileID: 11400000, guid: 1d446f70d3dff2c498ecf4d4a43a617c, type: 2}
   eSkills:
   - {fileID: 11400000, guid: de23cfed9f2256447925f579c68e0028, type: 2}
   - {fileID: 11400000, guid: f34296131f026ae448359d5db4a277d1, type: 2}
@@ -11960,6 +11963,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 468c6966f8d3f7049b6e66cf27aa42b8, type: 2}
   - {fileID: 11400000, guid: 0a6d00a02554f414099dfe94a36adffa, type: 2}
   - {fileID: 11400000, guid: 1848592336d2fe8408e79b034016ebf8, type: 2}
+  - {fileID: 11400000, guid: 6571707c2815cba4e80664313630d805, type: 2}
   rSkills:
   - {fileID: 11400000, guid: a3ff372b19a443c4c82f615e4c1de5ea, type: 2}
   - {fileID: 11400000, guid: eb70c3b390f831b4ba1f2801516d5e58, type: 2}
@@ -11973,6 +11977,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a323ef88cdc2f9241910165a9801c576, type: 2}
   - {fileID: 11400000, guid: 794493945a92a6c4d97e6f9e4b3c4f01, type: 2}
   - {fileID: 11400000, guid: f5dec1a14bef74a4eb1afb4ddbdd4f85, type: 2}
+  - {fileID: 11400000, guid: 5d455cad3c32404448add5317778a3a6, type: 2}
 --- !u!114 &502540015
 MonoBehaviour:
   m_ObjectHideFlags: 0

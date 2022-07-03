@@ -3,279 +3,283 @@
   "fightData": {
     "autoAttackData": [
       {
-        "champName": "Riven",
-        "value": -36,
-        "time": "0.103"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "0.884"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "0.135"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "1.485"
       },
       {
-        "champName": "Riven",
-        "value": -36,
-        "time": "1.208"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "1.586"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "2.313"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "2.082"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "3.252"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "2.680"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "3.420"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "2.789"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "4.341"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "3.276"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "4.526"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "3.873"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "5.432"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "3.990"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "5.633"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "4.470"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "6.523"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "5.067"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "6.739"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "5.190"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "7.612"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "5.665"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "7.844"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "6.261"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "8.701"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "6.390"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "8.951"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "6.858"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "9.794"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "7.455"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "10.056"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "7.590"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "10.886"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "8.124"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "11.162"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "8.722"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "11.976"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "8.870"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "12.269"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "9.320"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "13.373"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "9.916"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "14.478"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "10.071"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "15.275"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "10.514"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "15.585"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "11.112"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "16.366"
+        "champName": "Lillia",
+        "value": 7,
+        "time": "11.270"
       },
       {
-        "champName": "Riven",
-        "value": -13,
-        "time": "16.690"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "11.710"
       },
       {
-        "champName": "Garen",
-        "value": 34,
-        "time": "17.457"
+        "champName": "Olaf",
+        "value": 104,
+        "time": "12.307"
+      },
+      {
+        "champName": "Lillia",
+        "value": 7,
+        "time": "12.469"
+      },
+      {
+        "champName": "Olaf",
+        "value": 104,
+        "time": "12.903"
       }
     ],
     "spellData": [
       {
-        "champName": "Garen",
-        "spellName": "Garen W",
+        "champName": "Lillia",
+        "spellName": "Lillia Q",
+        "value": 57,
+        "time": "0.253"
+      },
+      {
+        "champName": "Olaf",
+        "spellName": "Olaf Q",
+        "value": 128,
+        "time": "0.253"
+      },
+      {
+        "champName": "Lillia",
+        "spellName": "Lillia W",
+        "value": 288,
+        "time": "0.263"
+      },
+      {
+        "champName": "Olaf",
+        "spellName": "Olaf W",
         "value": 0,
-        "time": "0.022"
+        "time": "0.263"
       },
       {
-        "champName": "Garen",
-        "spellName": "Garen Q",
-        "value": 106,
-        "time": "0.030"
+        "champName": "Olaf",
+        "spellName": "Olaf E",
+        "value": 324,
+        "time": "0.518"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven Q",
-        "value": 203,
-        "time": "1.539"
+        "champName": "Lillia",
+        "spellName": "Lillia E",
+        "value": 102,
+        "time": "0.670"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven W",
-        "value": 74,
-        "time": "1.794"
-      },
-      {
-        "champName": "Riven",
-        "spellName": "Riven E",
+        "champName": "Olaf",
+        "spellName": "Olaf R",
         "value": 0,
-        "time": "1.802"
+        "time": "0.777"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven R",
-        "value": 80,
-        "time": "2.065"
+        "champName": "Lillia",
+        "spellName": "Lillia R",
+        "value": 120,
+        "time": "1.474"
       },
       {
-        "champName": "Garen",
-        "spellName": "Garen E",
-        "value": 176,
-        "time": "3.149"
+        "champName": "Lillia",
+        "spellName": "Lillia Q",
+        "value": 57,
+        "time": "4.504"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven E",
-        "value": 0,
-        "time": "7.855"
+        "champName": "Olaf",
+        "spellName": "Olaf E",
+        "value": 357,
+        "time": "7.770"
       },
       {
-        "champName": "Garen",
-        "spellName": "Garen Q",
-        "value": 106,
-        "time": "8.032"
+        "champName": "Lillia",
+        "spellName": "Lillia Q",
+        "value": 57,
+        "time": "8.756"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven W",
-        "value": 74,
-        "time": "9.784"
+        "champName": "Olaf",
+        "spellName": "Olaf Q",
+        "value": 128,
+        "time": "9.581"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven E",
-        "value": 0,
-        "time": "13.857"
-      },
-      {
-        "champName": "Riven",
-        "spellName": "Riven Q",
-        "value": 221,
-        "time": "14.540"
-      },
-      {
-        "champName": "Garen",
-        "spellName": "Garen E",
-        "value": 41,
-        "time": "15.156"
-      },
-      {
-        "champName": "Garen",
-        "spellName": "Garen W",
-        "value": 0,
-        "time": "15.160"
-      },
-      {
-        "champName": "Garen",
-        "spellName": "Garen Q",
-        "value": 106,
-        "time": "16.033"
+        "champName": "Lillia",
+        "spellName": "Lillia W",
+        "value": 288,
+        "time": "10.266"
       }
     ],
     "passiveData": [
       {
-        "champName": "Riven",
-        "spellName": "Riven",
-        "value": 69,
-        "time": "0.103"
+        "champName": "Lillia",
+        "spellName": "Lillia",
+        "value": 94,
+        "time": "0.253"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven",
-        "value": 83,
-        "time": "2.313"
+        "champName": "Lillia",
+        "spellName": "Lillia",
+        "value": 94,
+        "time": "0.263"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven",
-        "value": 83,
-        "time": "8.951"
+        "champName": "Lillia",
+        "spellName": "Lillia",
+        "value": 94,
+        "time": "0.670"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven",
-        "value": 83,
-        "time": "10.056"
+        "champName": "Lillia",
+        "spellName": "Lillia",
+        "value": 94,
+        "time": "1.474"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven",
-        "value": 83,
-        "time": "14.478"
+        "champName": "Lillia",
+        "spellName": "Lillia",
+        "value": 94,
+        "time": "4.504"
       },
       {
-        "champName": "Riven",
-        "spellName": "Riven",
-        "value": 83,
-        "time": "15.585"
+        "champName": "Lillia",
+        "spellName": "Lillia",
+        "value": 94,
+        "time": "8.756"
+      },
+      {
+        "champName": "Lillia",
+        "spellName": "Lillia",
+        "value": 94,
+        "time": "10.266"
       }
     ]
   }
