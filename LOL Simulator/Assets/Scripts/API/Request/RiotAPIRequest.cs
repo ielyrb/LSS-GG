@@ -75,8 +75,8 @@ public class RiotAPIRequest : MonoBehaviour
         champ1 = CapitalizeFirstLetter(champ1).Trim().Replace(" ","").Replace("\u200B","");
         champ2 = CapitalizeFirstLetter(champ2).Trim().Replace(" ","").Replace("\u200B","");
 
-        apiURL1 = "http://ddragon.leagueoflegends.com/cdn/" + ver + "/data/en_US/champion/" + champ1 + ".json";
-        apiURL2 = "http://ddragon.leagueoflegends.com/cdn/" + ver + "/data/en_US/champion/" + champ2 + ".json";
+        apiURL1 = "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/" + champ1 + ".json";
+        apiURL2 = "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/" + champ2 + ".json";
 
         StartCoroutine(MakeRiotAPIRequest1(champ1,exp1));
         StartCoroutine(MakeRiotAPIRequest2(champ2,exp2));
@@ -88,7 +88,7 @@ public class RiotAPIRequest : MonoBehaviour
         for(int i = 0; i<10; i++)
         {
             string _name = matchRequest.matchChampions[i];
-            string _url = "http://ddragon.leagueoflegends.com/cdn/12.10.1/data/en_US/champion/" + _name + ".json";
+            string _url = "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/" + _name + ".json";
             
             StartCoroutine(LoadingAllChampions(i,_url,_name));
         }
@@ -107,12 +107,12 @@ public class RiotAPIRequest : MonoBehaviour
         }
         else
         {               
-            string s = "data\":{\""+_name.Trim().Replace(" ","").Replace("\u200B","")+"\"";         
-            s = unityWebRequest.downloadHandler.text.Replace(s,"data\":{\"Champion\"");
-            champion = JsonConvert.DeserializeObject<RiotAPIResponse>(s);
+            //string s = "data\":{\""+_name.Trim().Replace(" ","").Replace("\u200B","")+"\"";         
+            //s = unityWebRequest.downloadHandler.text.Replace(s,"data\":{\"Champion\"");
+            champion = JsonConvert.DeserializeObject<RiotAPIResponse>(unityWebRequest.downloadHandler.text);
             for(int i = 0; i<4; i++)
             {
-                allAbilities[_num].name[i] = champion.data.Champion.spells[i].name;
+                //allAbilities[_num].name[i] = champion.data.Champion.spells[i].name;
             }   
         }
     }
@@ -131,8 +131,8 @@ public class RiotAPIRequest : MonoBehaviour
         }
         else
         {               
-            string s = "data\":{\""+name+"\"";         
-            champion = JsonConvert.DeserializeObject<RiotAPIResponse>(unityWebRequest.downloadHandler.text.Replace(s,"data\":{\"Champion\""));
+            //string s = "data\":{\""+name+"\"";         
+            champion = JsonConvert.DeserializeObject<RiotAPIResponse>(unityWebRequest.downloadHandler.text);
             Load1 = true;
 
             SimulateFight(0, _champ1, _exp,0);
@@ -153,8 +153,8 @@ public class RiotAPIRequest : MonoBehaviour
         }
         else
         {
-            string s = "data\":{\""+name+"\"";
-            champion = JsonConvert.DeserializeObject<RiotAPIResponse>(unityWebRequest.downloadHandler.text.Replace(s,"data\":{\"Champion\""));
+            //string s = "data\":{\""+name+"\"";
+            champion = JsonConvert.DeserializeObject<RiotAPIResponse>(unityWebRequest.downloadHandler.text);
             Load2 = true;
 
             SimulateFight(1,_champ2,_exp,0);
@@ -209,11 +209,11 @@ public class RiotAPIRequest : MonoBehaviour
         myStats.level = GetLevel(_exp);
         if(_type == 0)
         {
-            myStats.baseHealth = (float)champion.data.Champion.stats.hp;
-            myStats.baseAD = (float)champion.data.Champion.stats.attackdamage;
-            myStats.baseArmor = (float)champion.data.Champion.stats.armor;
-            myStats.baseSpellBlock = (float)(champion.data.Champion.stats.spellblock);
-            myStats.baseAttackSpeed = (float)champion.data.Champion.stats.attackspeed;
+            myStats.baseHealth = (float)champion.stats.health.flat;
+            myStats.baseAD = (float)champion.stats.attackDamage.flat;
+            myStats.baseArmor = (float)champion.stats.armor.flat;
+            myStats.baseSpellBlock = (float)(champion.stats.magicResistance.flat);
+            myStats.baseAttackSpeed = (float)champion.stats.attackSpeed.flat;
 
             myStats.maxHealth = myStats.baseHealth;
             myStats.AD = myStats.baseAD;
@@ -231,11 +231,11 @@ public class RiotAPIRequest : MonoBehaviour
         }
         else if(_type == 0 || _type == 2)
         {
-            myStats.maxHealth = (float)champion.data.Champion.stats.hp;
-            myStats.AD = (float)champion.data.Champion.stats.attackdamage;
-            myStats.armor = (float)champion.data.Champion.stats.armor;
-            myStats.spellBlock = (float)(champion.data.Champion.stats.spellblock);
-            myStats.attackSpeed = (float)champion.data.Champion.stats.attackspeed;
+            myStats.maxHealth = (float)champion.stats.health.flat;
+            myStats.AD = (float)champion.stats.attackDamage.flat;
+            myStats.armor = (float)champion.stats.armor.flat;
+            myStats.spellBlock = (float)(champion.stats.magicResistance.flat);
+            myStats.attackSpeed = (float)champion.stats.attackSpeed.flat;
         }
 
         GetStatsByLevel(myStats);
@@ -325,11 +325,11 @@ public class RiotAPIRequest : MonoBehaviour
 
         double[] mFactor ={0, 0.72, 1.4750575, 2.2650575, 3.09, 3.95, 4.8450575, 5.7750575, 6.74, 7.74, 8.7750575, 9.8450575, 10.95, 12.09, 13.2650575, 14.4750575, 15.72, 17};
         if(_level == 1) return;
-        myStats.maxHealth += (float)(champion.data.Champion.stats.hpperlevel * mFactor[_level-1]);
-        myStats.attackSpeed = (float)(myStats.baseAttackSpeed * (1 + (champion.data.Champion.stats.attackspeedperlevel * (_level - 1)) / 100));
-        myStats.armor += ((float) (champion.data.Champion.stats.armorperlevel) * (float)  mFactor[_level-1]);
-        myStats.AD += ((float)  (champion.data.Champion.stats.attackdamageperlevel) * (float)  mFactor[_level-1]);
-        myStats.spellBlock += ((float)  (champion.data.Champion.stats.spellblockperlevel) * (float)  mFactor[_level-1]);
+        myStats.maxHealth += (float)(champion.stats.health.perLevel * mFactor[_level-1]);
+        myStats.attackSpeed = (float)(myStats.baseAttackSpeed * (1 + (champion.stats.attackSpeed.perLevel * (_level - 1)) / 100));
+        myStats.armor += ((float) (champion.stats.armor.perLevel) * (float)  mFactor[_level-1]);
+        myStats.AD += ((float)  (champion.stats.attackDamage.perLevel) * (float)  mFactor[_level-1]);
+        myStats.spellBlock += ((float)  (champion.stats.magicResistance.perLevel) * (float)  mFactor[_level-1]);
     }
 
     public static string ucfirst(string s)
