@@ -73,7 +73,11 @@ public class ChampCombat : MonoBehaviour
 
         if (!SimManager.battleStarted) return;
         attackCooldown -= Time.deltaTime;
+<<<<<<< HEAD
         //attackCD.text = attackCooldown.ToString("F3");
+=======
+        attackCD.text = attackCooldown.ToString("F3");
+>>>>>>> f8c1ce0 (Revert "no message")
     }
 
     IEnumerator DynamicPassive(float cooldown)

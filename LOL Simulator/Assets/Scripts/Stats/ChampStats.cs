@@ -430,11 +430,12 @@ public class ChampStats : MonoBehaviour
         outputStats[0].text = name;
         outputStats[1].text = level.ToString("F0");
         outputStats[2].text = maxHealth.ToString("F0");
-        outputStats[3].text = AD.ToString("F0");
-        outputStats[4].text = AP.ToString("F0");
-        outputStats[5].text = armor.ToString("F0");
-        outputStats[6].text = spellBlock.ToString("F0");
-        outputStats[7].text = attackSpeed.ToString("F2");
+        outputStats[3].text = currentHealth.ToString("F0");
+        outputStats[4].text = AD.ToString("F0");
+        outputStats[5].text = AP.ToString("F0");
+        outputStats[6].text = armor.ToString("F0");
+        outputStats[7].text = spellBlock.ToString("F0");
+        outputStats[8].text = attackSpeed.ToString("F2");
     }
 
     void GetTarget()
