@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 
-public class Abilities
-{
-    public List<P> P { get; set; }
-    public List<Q> Q { get; set; }
-    public List<W> W { get; set; }
-    public List<E> E { get; set; }
-    public List<R> R { get; set; }
-}
+//public class Abilities
+//{
+//    public List<P> P { get; set; }
+//    public List<Q> Q { get; set; }
+//    public List<W> W { get; set; }
+//    public List<E> E { get; set; }
+//    public List<R> R { get; set; }
+//}
 
 public class AcquisitionRadius
 {
@@ -170,38 +170,6 @@ public class Description
     public string region { get; set; }
 }
 
-public class E
-{
-    public string name { get; set; }
-    public string icon { get; set; }
-    public List<Effect> effects { get; set; }
-    public Cost cost { get; set; }
-    public Cooldown cooldown { get; set; }
-    public string targeting { get; set; }
-    public string affects { get; set; }
-    public string spellshieldable { get; set; }
-    public string resource { get; set; }
-    public object damageType { get; set; }
-    public object spellEffects { get; set; }
-    public string projectile { get; set; }
-    public object onHitEffects { get; set; }
-    public object occurrence { get; set; }
-    public string notes { get; set; }
-    public string blurb { get; set; }
-    public object missileSpeed { get; set; }
-    public List<int> rechargeRate { get; set; }
-    public object collisionRadius { get; set; }
-    public object tetherRadius { get; set; }
-    public object onTargetCdStatic { get; set; }
-    public object innerRadius { get; set; }
-    public string speed { get; set; }
-    public object width { get; set; }
-    public object angle { get; set; }
-    public string castTime { get; set; }
-    public string effectRadius { get; set; }
-    public string targetRange { get; set; }
-}
-
 public class Effect
 {
     public string description { get; set; }
@@ -276,38 +244,6 @@ public class Movespeed
     public double percentPerLevel { get; set; }
 }
 
-public class P
-{
-    public string name { get; set; }
-    public string icon { get; set; }
-    public List<Effect> effects { get; set; }
-    public object cost { get; set; }
-    public Cooldown cooldown { get; set; }
-    public string targeting { get; set; }
-    public string affects { get; set; }
-    public string spellshieldable { get; set; }
-    public object resource { get; set; }
-    public string damageType { get; set; }
-    public object spellEffects { get; set; }
-    public object projectile { get; set; }
-    public object onHitEffects { get; set; }
-    public string occurrence { get; set; }
-    public string notes { get; set; }
-    public string blurb { get; set; }
-    public object missileSpeed { get; set; }
-    public object rechargeRate { get; set; }
-    public object collisionRadius { get; set; }
-    public object tetherRadius { get; set; }
-    public object onTargetCdStatic { get; set; }
-    public object innerRadius { get; set; }
-    public object speed { get; set; }
-    public object width { get; set; }
-    public object angle { get; set; }
-    public object castTime { get; set; }
-    public object effectRadius { get; set; }
-    public object targetRange { get; set; }
-}
-
 public class PathingRadius
 {
     public double flat { get; set; }
@@ -323,7 +259,7 @@ public class Price
     public int saleRp { get; set; }
 }
 
-public class Q
+public class Abilities
 {
     public string name { get; set; }
     public string icon { get; set; }
@@ -352,38 +288,6 @@ public class Q
     public object angle { get; set; }
     public string castTime { get; set; }
     public object effectRadius { get; set; }
-    public object targetRange { get; set; }
-}
-
-public class R
-{
-    public string name { get; set; }
-    public string icon { get; set; }
-    public List<Effect> effects { get; set; }
-    public Cost cost { get; set; }
-    public Cooldown cooldown { get; set; }
-    public string targeting { get; set; }
-    public string affects { get; set; }
-    public string spellshieldable { get; set; }
-    public string resource { get; set; }
-    public string damageType { get; set; }
-    public string spellEffects { get; set; }
-    public string projectile { get; set; }
-    public object onHitEffects { get; set; }
-    public object occurrence { get; set; }
-    public string notes { get; set; }
-    public string blurb { get; set; }
-    public object missileSpeed { get; set; }
-    public object rechargeRate { get; set; }
-    public object collisionRadius { get; set; }
-    public object tetherRadius { get; set; }
-    public object onTargetCdStatic { get; set; }
-    public object innerRadius { get; set; }
-    public string speed { get; set; }
-    public string width { get; set; }
-    public object angle { get; set; }
-    public string castTime { get; set; }
-    public string effectRadius { get; set; }
     public object targetRange { get; set; }
 }
 
@@ -407,7 +311,8 @@ public class RiotAPIResponse
     public Stats stats { get; set; }
     public List<string> roles { get; set; }
     public AttributeRatings attributeRatings { get; set; }
-    public Abilities abilities { get; set; }
+    //public Abilities abilities { get; set; }
+    public Dictionary<string, Abilities> abilities { get; set; }
     public string releaseDate { get; set; }
     public string releasePatch { get; set; }
     public string patchLastChanged { get; set; }
@@ -517,36 +422,3 @@ public class UrfShielding
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
 }
-
-public class W
-{
-    public string name { get; set; }
-    public string icon { get; set; }
-    public List<Effect> effects { get; set; }
-    public Cost cost { get; set; }
-    public Cooldown cooldown { get; set; }
-    public string targeting { get; set; }
-    public string affects { get; set; }
-    public string spellshieldable { get; set; }
-    public string resource { get; set; }
-    public string damageType { get; set; }
-    public string spellEffects { get; set; }
-    public string projectile { get; set; }
-    public object onHitEffects { get; set; }
-    public object occurrence { get; set; }
-    public string notes { get; set; }
-    public string blurb { get; set; }
-    public object missileSpeed { get; set; }
-    public object rechargeRate { get; set; }
-    public object collisionRadius { get; set; }
-    public object tetherRadius { get; set; }
-    public object onTargetCdStatic { get; set; }
-    public object innerRadius { get; set; }
-    public string speed { get; set; }
-    public string width { get; set; }
-    public string angle { get; set; }
-    public string castTime { get; set; }
-    public string effectRadius { get; set; }
-    public object targetRange { get; set; }
-}
-

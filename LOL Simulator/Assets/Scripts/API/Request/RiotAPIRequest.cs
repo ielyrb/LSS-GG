@@ -78,8 +78,8 @@ public class RiotAPIRequest : MonoBehaviour
         apiURL1 = "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/" + champ1 + ".json";
         apiURL2 = "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/" + champ2 + ".json";
 
-        StartCoroutine(MakeRiotAPIRequest1(champ1,exp1));
-        StartCoroutine(MakeRiotAPIRequest2(champ2,exp2));
+        //StartCoroutine(MakeRiotAPIRequest1(champ1,exp1));
+        //StartCoroutine(MakeRiotAPIRequest2(champ2,exp2));
         //LoadAllChampions();
     }
 
