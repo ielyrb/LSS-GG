@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+<<<<<<< HEAD
 
 //public class Abilities
 //{
@@ -8,165 +9,82 @@ using System.Collections.Generic;
 //    public List<E> E { get; set; }
 //    public List<R> R { get; set; }
 //}
-
-public class AcquisitionRadius
+=======
+public class ChampData
 {
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
+    public string type { get; set; }
+    public string format { get; set; }
+    public string version { get; set; }
+    public Data data { get; set; }
+}
+>>>>>>> a2e113094b5f3dfa8b497b0f75f5f5f58c5e6fa1
+
+public class Champion
+{
+    public string id { get; set; }
+    public string key { get; set; }
+    public string name { get; set; }
+    public string title { get; set; }
+    public Image image { get; set; }
+    public List<Skin> skins { get; set; }
+    public string lore { get; set; }
+    public string blurb { get; set; }
+    public List<string> allytips { get; set; }
+    public List<string> enemytips { get; set; }
+    public List<string> tags { get; set; }
+    public string partype { get; set; }
+    public Info info { get; set; }
+    public Stats stats { get; set; }
+    public List<Spell> spells { get; set; }
+    public Passive passive { get; set; }
+    public List<object> recommended { get; set; }
 }
 
-public class AramDamageDealt
+public class ChampionsRe
 {
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
+    public string _id { get; set; }
+    public ChampData champData { get; set; }
 }
 
-public class AramDamageTaken
+public class Data
 {
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
+    public Champion Champion { get; set; }
 }
 
-public class AramHealing
+public class Datavalues
 {
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
 }
 
-public class AramShielding
+public class Image
 {
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
+    public string full { get; set; }
+    public string sprite { get; set; }
+    public string group { get; set; }
+    public double x { get; set; }
+    public double y { get; set; }
+    public double w { get; set; }
+    public double h { get; set; }
 }
 
-public class Armor
+public class Info
 {
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
+    public double attack { get; set; }
+    public double defense { get; set; }
+    public double magic { get; set; }
+    public double difficulty { get; set; }
 }
 
-public class AttackCastTime
+public class Leveltip
 {
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
+    public List<string> label { get; set; }
+    public List<string> effect { get; set; }
 }
 
-public class AttackDamage
-{
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
-}
-
-public class AttackDelayOffset
-{
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
-}
-
-public class AttackRange
-{
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
-}
-
-public class AttackSpeed
-{
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
-}
-
-public class AttackSpeedRatio
-{
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
-}
-
-public class AttackTotalTime
-{
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
-}
-
-public class AttributeRatings
-{
-    public int damage { get; set; }
-    public int toughness { get; set; }
-    public int control { get; set; }
-    public int mobility { get; set; }
-    public int utility { get; set; }
-    public int abilityReliance { get; set; }
-    public int attack { get; set; }
-    public int defense { get; set; }
-    public int magic { get; set; }
-    public int difficulty { get; set; }
-}
-
-public class Chroma
+public class Passive
 {
     public string name { get; set; }
-    public int id { get; set; }
-    public string chromaPath { get; set; }
-    public List<string> colors { get; set; }
-    public List<Description> descriptions { get; set; }
-    public List<Rarity> rarities { get; set; }
-}
-
-public class Cooldown
-{
-    public List<Modifier> modifiers { get; set; }
-    public bool affectedByCdr { get; set; }
-}
-
-public class Cost
-{
-    public List<Modifier> modifiers { get; set; }
-}
-
-public class CriticalStrikeDamage
-{
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
-}
-
-public class CriticalStrikeDamageModifier
-{
-    public double flat { get; set; }
-    public double percent { get; set; }
-    public double perLevel { get; set; }
-    public double percentPerLevel { get; set; }
-}
-
-public class Description
-{
     public string description { get; set; }
+<<<<<<< HEAD
     public string region { get; set; }
 }
 
@@ -295,10 +213,14 @@ public class Rarity
 {
     public int? rarity { get; set; }
     public string region { get; set; }
+=======
+    public Image image { get; set; }
+>>>>>>> a2e113094b5f3dfa8b497b0f75f5f5f58c5e6fa1
 }
 
 public class RiotAPIResponse
 {
+<<<<<<< HEAD
     public int id { get; set; }
     public string key { get; set; }
     public string name { get; set; }
@@ -327,40 +249,46 @@ public class SelectionRadius
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
+=======
+    public List<ChampionsRe> ChampionsRes { get; set; }
+>>>>>>> a2e113094b5f3dfa8b497b0f75f5f5f58c5e6fa1
 }
 
 public class Skin
 {
+    public string id { get; set; }
+    public double num { get; set; }
     public string name { get; set; }
-    public int id { get; set; }
-    public bool isBase { get; set; }
-    public string availability { get; set; }
-    public string formatName { get; set; }
-    public bool lootEligible { get; set; }
-    public string cost { get; set; }
-    public int sale { get; set; }
-    public object distribution { get; set; }
-    public string rarity { get; set; }
-    public List<Chroma> chromas { get; set; }
-    public string lore { get; set; }
-    public string release { get; set; }
-    public List<string> set { get; set; }
-    public string splashPath { get; set; }
-    public string uncenteredSplashPath { get; set; }
-    public string tilePath { get; set; }
-    public string loadScreenPath { get; set; }
-    public string loadScreenVintagePath { get; set; }
-    public bool newEffects { get; set; }
-    public bool newAnimations { get; set; }
-    public bool newRecall { get; set; }
-    public bool newVoice { get; set; }
-    public bool newQuotes { get; set; }
-    public List<string> voiceActor { get; set; }
-    public List<string> splashArtist { get; set; }
+    public bool chromas { get; set; }
+}
+
+public class Spell
+{
+    public string id { get; set; }
+    public string name { get; set; }
+    public string description { get; set; }
+    public string tooltip { get; set; }
+    public Leveltip leveltip { get; set; }
+    public double maxrank { get; set; }
+    public List<double> cooldown { get; set; }
+    public string cooldownBurn { get; set; }
+    public List<double> cost { get; set; }
+    public string costBurn { get; set; }
+    public Datavalues datavalues { get; set; }
+    public List<List<double>> effect { get; set; }
+    public List<string> effectBurn { get; set; }
+    public List<object> vars { get; set; }
+    public string costType { get; set; }
+    public string maxammo { get; set; }
+    public List<double> range { get; set; }
+    public string rangeBurn { get; set; }
+    public Image image { get; set; }
+    public string resource { get; set; }
 }
 
 public class Stats
 {
+<<<<<<< HEAD
     public Health health { get; set; }
     public HealthRegen healthRegen { get; set; }
     public Mana mana { get; set; }
@@ -422,3 +350,27 @@ public class UrfShielding
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
 }
+=======
+    public double hp { get; set; }
+    public double hpperlevel { get; set; }
+    public double mp { get; set; }
+    public double mpperlevel { get; set; }
+    public double movespeed { get; set; }
+    public double armor { get; set; }
+    public double armorperlevel { get; set; }
+    public double spellblock { get; set; }
+    public double spellblockperlevel { get; set; }
+    public double attackrange { get; set; }
+    public double hpregen { get; set; }
+    public double hpregenperlevel { get; set; }
+    public double mpregen { get; set; }
+    public double mpregenperlevel { get; set; }
+    public double crit { get; set; }
+    public double critperlevel { get; set; }
+    public double attackdamage { get; set; }
+    public double attackdamageperlevel { get; set; }
+    public double attackspeedperlevel { get; set; }
+    public double attackspeed { get; set; }
+}
+
+>>>>>>> a2e113094b5f3dfa8b497b0f75f5f5f58c5e6fa1

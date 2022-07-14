@@ -28,7 +28,8 @@ public class OutputManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(EndBattle());
+            scrollable = false;
+            //StartCoroutine(EndBattle());
         }
     }
 

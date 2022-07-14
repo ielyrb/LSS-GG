@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public new string name;
+    public string name;
     public int flatHP;
     public int flatAD;
     public int flatAP;

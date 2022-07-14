@@ -90,7 +90,7 @@ public class PassiveList : ScriptableObject
                 damage -= (int)target.spellBlock;
                 target.TakeDamage(damage);
                 output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " Damage: " + damage.ToString() + " Heal: " + maxHeal + "\n\n";
-                target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                target.UpdateTimer(SimManager.timer);
                 break;
 
             case "Darius":
@@ -111,7 +111,7 @@ public class PassiveList : ScriptableObject
                     }
                     damage = 150 + (int)Mathf.Round(myStats.FlatPhysicalDamageMod * 0.3f);
                     output.text += "[PASSIVE] " +myStats.name + " " + myStats.passiveSkill.skillName + " is triggered dealing "+damage+" damage\n\n";
-                    target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    target.UpdateTimer(SimManager.timer);
                 }
                 break;
 
@@ -123,7 +123,7 @@ public class PassiveList : ScriptableObject
                 else
                 {
                     output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " is triggered dealing 10% more damage\n\n";
-                    target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    target.UpdateTimer(SimManager.timer);
                 }
                 break;
 
@@ -139,7 +139,7 @@ public class PassiveList : ScriptableObject
                 myStats.UpdateStats();
                 target.TakeDamage(damage);
                 output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " Damage: " + damage.ToString() + " Heal: "+maxHeal+"\n\n";
-                target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                target.UpdateTimer(SimManager.timer);
                 break;
 
             case "Fiora":
@@ -152,7 +152,7 @@ public class PassiveList : ScriptableObject
                 myStats.UpdateStats();
                 target.TakeDamage(damage);
                 output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " Damage: " + damage.ToString() + " Heal: " + maxHeal + "\n\n";
-                target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                target.UpdateTimer(SimManager.timer);
                 break;
 
             case "Jax":
@@ -200,7 +200,7 @@ public class PassiveList : ScriptableObject
                 damage = (int)Mathf.Round(310+myStats.FlatPhysicalDamageMod);
                 target.TakeDamage(damage);
                 output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " dealing " + damage.ToString() + " true damage \n\n";
-                target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                target.UpdateTimer(SimManager.timer);
                 break;
 
             case "Aatrox":
@@ -212,13 +212,13 @@ public class PassiveList : ScriptableObject
                     myStats.currentHealth = myStats.maxHealth;
                 }
                 output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " Damage: " + damage.ToString() + " Heal: "+postdamage+"\n\n";
-                target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                target.UpdateTimer(SimManager.timer);
                 break;
 
             case "Riven":
                 damage = (int)Mathf.Round(myStats.AD * 0.6f);
                 output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " is triggered dealing " + damage.ToString() + " damage. \n\n";
-                target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                target.UpdateTimer(SimManager.timer);
                 break;
 
             case "Mordekaiser":
@@ -228,13 +228,13 @@ public class PassiveList : ScriptableObject
                     damage += (int)Mathf.Round(myStats.AP * 0.3f);
                     damage += (int)Mathf.Round(target.maxHealth * 0.05f);
                     output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " is triggered dealing " + damage.ToString() + " damage. \n\n";
-                    target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    target.UpdateTimer(SimManager.timer);
                 }
                 else
                 {
                     damage = (int)Mathf.Round(myStats.AP * 0.4f);
                     output.text += "[PASSIVE] " + myStats.name + " " + myStats.passiveSkill.skillName + " is triggered dealing " + damage.ToString() + " damage. \n\n";
-                    target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    target.UpdateTimer(SimManager.timer);
                 }
                 break;
         }

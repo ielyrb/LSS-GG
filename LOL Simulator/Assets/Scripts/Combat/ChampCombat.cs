@@ -11,9 +11,8 @@ public class ChampCombat : MonoBehaviour
     ChampStats myStats;
     ChampStats targetStats;
     GameObject[] champions;
-    public TextMeshProUGUI attackCD;
     TextMeshProUGUI output;
-    string[] combatPriority = {"","","","",""};
+    public string[] combatPriority = {"","","","",""};
     int cpLength = 5; //Combat Priority
     float damage;
     static float _attackSpeed = 0f;
@@ -21,7 +20,8 @@ public class ChampCombat : MonoBehaviour
     public bool canAttack = true;
     public bool isCasting = true;
     bool firstAttack = true;
-    public int id;
+    public TextMeshProUGUI damageSum;
+    public TextMeshProUGUI[] abilitySum;
 
     public GenerateJSON generateJSON;
 
@@ -48,14 +48,18 @@ public class ChampCombat : MonoBehaviour
 
     void Update()
     {        
-        Time.timeScale = SimManager.speed;
-
         if(!targetStats)
         {
             if(!myStats.currentTarget) return;
             targetStats = myStats.currentTarget.GetComponent<ChampStats>();
         }
-        if(!SimManager.battleStarted) return;
+        if (!SimManager.battleStarted)
+        {
+            SimManager.timer = 0;
+            SimManager._timer = 0;
+            return;
+        }
+        
 
         CheckPassive();
         
@@ -71,9 +75,7 @@ public class ChampCombat : MonoBehaviour
         }
         #endregion
 
-        if (!SimManager.battleStarted) return;
         attackCooldown -= Time.deltaTime;
-        //attackCD.text = attackCooldown.ToString("F3");
     }
 
     IEnumerator DynamicPassive(float cooldown)
@@ -84,21 +86,24 @@ public class ChampCombat : MonoBehaviour
 
     void CheckPassive()
     {
-        if (myStats.passiveSkill.alwaysActive)
+        if (myStats.passiveSkill != null)
         {
-            if(myStats.passiveReady)
+            if (myStats.passiveSkill.alwaysActive)
             {
-                if (myStats.passiveSkill.inactive) return;
-                if (myStats.name == "Mordekaiser")
+                if (myStats.passiveReady)
                 {
-                    myStats.passiveSkill.UseSkill(19, myStats, targetStats);
+                    if (myStats.passiveSkill.inactive) return;
+                    if (myStats.name == "Mordekaiser")
+                    {
+                        myStats.passiveSkill.UseSkill(19, myStats, targetStats);
+                    }
+                    else
+                    {
+                        myStats.passiveSkill.UseSkill(myStats.level, myStats, targetStats);
+                    }
+                    myStats.passiveReady = false;
+                    myStats.pCD = myStats.passiveSkill.coolDown;
                 }
-                else
-                {
-                    myStats.passiveSkill.UseSkill(myStats.level, myStats, targetStats);
-                }
-                myStats.passiveReady = false;
-                myStats.pCD = myStats.passiveSkill.coolDown;
             }
         }
     }
@@ -117,86 +122,88 @@ public class ChampCombat : MonoBehaviour
         int ultLevel = 2;
         int damage = 0;
         int passiveDamage = 0;
+        int prevDamage = 0;
         switch (skill)
         {
             #region Ability Q
             case "Q":
-                if (myStats.status.silence || myStats.status.stun) yield break;
-                if (isCasting) yield break;
-                if (!myStats.qReady) yield break;
-                if (myStats.qSkill.basic.inactive) yield break;
+                    if (myStats.status.silence || myStats.status.stun) yield break;
+                    if (isCasting) yield break;
+                    if (!myStats.qReady) yield break;
+                    if (myStats.qSkill == null) yield break;
+                    if (myStats.qSkill.basic.inactive) yield break;
 
-                //Ashe
-                if (myStats.name == "Ashe" && myStats.qStacks < 4) yield break;
-                //
+                    //Ashe
+                    if (myStats.name == "Ashe" && myStats.qStacks < 4) yield break;
+                    //
 
-                isCasting = true;
-                StartCoroutine(UpdateCasting(myStats.qSkill.basic.castTime));
-                //if (targetStats.currentHealth <= 0) yield break;
-                yield return new WaitForSeconds(myStats.qSkill.basic.castTime);
-                myStats.qReady = false;
-
-                if (myStats.qSkill.multihit.multiHit)
-                {
-                    for (int i = 0; i < myStats.qSkill.multihit.hits[skillLevel]; i++)
-                    {
-                        damage = myStats.qSkill.UseSkill(skillLevel, myStats, targetStats);
-                        if (targetStats.dynamicStatus["Frost Shot"])
-                        {
-                            damage *= (int)Mathf.Round(1.1f);
-                        }
-                        yield return new WaitForSeconds(0.01f);
-                    }
-                }
-                else
-                {
-                    if (targetStats.currentHealth <= 0) yield break;
-                    damage = myStats.qSkill.UseSkill(skillLevel, myStats, targetStats);
-                }
-
-                #region Ashe
-                if (myStats.name == "Ashe")
-                {
                     isCasting = true;
-                    StartCoroutine(UpdateCasting(attackCooldown = 1f / (float)myStats.attackSpeed));
-                    yield return new WaitForSeconds(attackCooldown = 1f / (float)myStats.attackSpeed);
-                    myStats.qReady = true;
-                    myStats.qCD = (float)(attackCooldown = 1f / myStats.attackSpeed);
-                }
-                #endregion
+                    StartCoroutine(UpdateCasting(myStats.qSkill.basic.castTime));
+                    if (targetStats.currentHealth <= 0) yield break;
+                    yield return new WaitForSeconds(myStats.qSkill.basic.castTime);
+                    myStats.qReady = false;
+                    prevDamage = int.Parse(abilitySum[1].text);
 
-                #region Riven
-                if (myStats.name == "Riven")
-                {
-                    myStats.passiveReady = true;
-                }
-                #endregion
+                    if (myStats.qSkill.multihit.multiHit)
+                    {
+                        for (int i = 0; i < myStats.qSkill.multihit.hits[skillLevel]; i++)
+                        {
+                            damage = myStats.qSkill.UseSkill(skillLevel, myStats, targetStats, abilitySum[1], prevDamage);
+                            if (targetStats.dynamicStatus["Frost Shot"])
+                            {
+                                damage *= (int)Mathf.Round(1.1f);
+                            }
+                            yield return new WaitForSeconds(0.01f);
+                        }
+                    }
+                    else
+                    {
+                        if (targetStats.currentHealth <= 0) yield break;
+                        damage = myStats.qSkill.UseSkill(skillLevel, myStats, targetStats, abilitySum[1], prevDamage);
+                    }
 
-                #region Lucian
-                if (myStats.name == "Lucian")
-                {
-                    myStats.passiveReady = true;
-                }
-                #endregion
+                    #region Ashe
+                    if (myStats.name == "Ashe")
+                    {
+                        isCasting = true;
+                        StartCoroutine(UpdateCasting(attackCooldown = 1f / (float)myStats.attackSpeed));
+                        yield return new WaitForSeconds(attackCooldown = 1f / (float)myStats.attackSpeed);
+                        myStats.qReady = true;
+                        myStats.qCD = (float)(attackCooldown = 1f / myStats.attackSpeed);
+                    }
+                    #endregion
 
-                #region Akali
-                if (myStats.name == "Akali")
-                {
-                    myStats.passiveReady = true;
-                }
-                #endregion
+                    #region Riven
+                    if (myStats.name == "Riven")
+                    {
+                        myStats.passiveReady = true;
+                    }
+                    #endregion
 
-                else
-                {
-                    myStats.qCD = myStats.qSkill.basic.coolDown[skillLevel];
-                }
+                    #region Lucian
+                    if (myStats.name == "Lucian")
+                    {
+                        myStats.passiveReady = true;
+                    }
+                    #endregion
 
-                generateJSON.SendData(false, this.gameObject.name, damage, SimManager.timer, 2, myStats.qSkill.name);
-                if (myStats.passiveSkill.applyOnAbility)
-                {
-                    passiveDamage = myStats.passiveSkill.UseSkill(myStats.level, myStats, targetStats);
-                    generateJSON.SendData(false, this.gameObject.name, passiveDamage, SimManager.timer, 3, myStats.passiveSkill.name);
-                }
+                    #region Akali
+                    if (myStats.name == "Akali")
+                    {
+                        myStats.passiveReady = true;
+                    }
+                    #endregion
+
+                    else
+                    {
+                        myStats.qCD = myStats.qSkill.basic.coolDown[skillLevel];
+                    }
+                    generateJSON.SendData(false, this.gameObject.name, damage, SimManager.timer, 2, myStats.qSkill.name);
+                    if (myStats.passiveSkill.applyOnAbility)
+                    {
+                        passiveDamage = myStats.passiveSkill.UseSkill(myStats.level, myStats, targetStats);
+                        generateJSON.SendData(false, this.gameObject.name, passiveDamage, SimManager.timer, 3, myStats.passiveSkill.name);
+                    }
             
                 break;
 #endregion
@@ -206,6 +213,7 @@ public class ChampCombat : MonoBehaviour
                 if (myStats.status.silence || myStats.status.stun) yield break;
                 if (isCasting) yield break;
                 if (!myStats.wReady) yield break;
+                if (myStats.wSkill == null) yield break;
                 if (myStats.wSkill.basic.inactive) yield break;
             
                 isCasting = true;
@@ -213,7 +221,8 @@ public class ChampCombat : MonoBehaviour
                 yield return new WaitForSeconds(myStats.wSkill.basic.castTime);
                 if (myStats.status.silence || myStats.status.stun) yield break;
                 if (targetStats.currentHealth <= 0) yield break;
-                damage = myStats.wSkill.UseSkill(skillLevel, myStats, targetStats);
+                prevDamage = int.Parse(abilitySum[2].text);
+                damage = myStats.wSkill.UseSkill(skillLevel, myStats, targetStats, abilitySum[2], prevDamage);
                 myStats.wReady = false;
                 myStats.wCD = myStats.wSkill.basic.coolDown[skillLevel];
                 generateJSON.SendData(false, this.gameObject.name, damage, SimManager.timer, 2, myStats.wSkill.name);
@@ -260,7 +269,9 @@ public class ChampCombat : MonoBehaviour
                 if (myStats.status.silence || myStats.status.stun) yield break;
                 if (isCasting) yield break;
                 if (!myStats.eReady) yield break;
+                if (myStats.eSkill == null) yield break;
                 if (myStats.eSkill.basic.inactive) yield break;
+                prevDamage = int.Parse(abilitySum[3].text);
 
                 isCasting = true;
                 myStats.eReady = false;
@@ -273,8 +284,7 @@ public class ChampCombat : MonoBehaviour
                         if (myStats.eSkill.charge.charges > 0)
                         {
                             //myStats.eSkill.charges--;
-                            damage = myStats.eSkill.UseSkill(skillLevel, myStats, targetStats);
-                            Debug.Log(myStats.eSkill.charge.charges);
+                            damage = myStats.eSkill.UseSkill(skillLevel, myStats, targetStats, abilitySum[3], prevDamage);
                         }
                         else
                         {
@@ -319,7 +329,7 @@ public class ChampCombat : MonoBehaviour
                             float timeToWait = 3f / (myStats.eSkill.multihit.hits[skillLevel]);
                             if (!myStats.status.stun)
                             {
-                                damage = myStats.eSkill.UseSkill(skillLevel, myStats, targetStats);
+                                damage = myStats.eSkill.UseSkill(skillLevel, myStats, targetStats, abilitySum[3], prevDamage);
                             }
                             yield return new WaitForSeconds(timeToWait);
                         }
@@ -336,14 +346,14 @@ public class ChampCombat : MonoBehaviour
                         myStats.dynamicStatus[myStats.eSkill.basic.name] = true;
                         myStats.dynamicStatusStacks[myStats.eSkill.basic.name] = 0;
                         output.text += "[ABILITY] " + myStats.name + " used " + myStats.eSkill.basic.name + "\n\n";
-                        myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                        myStats.UpdateTimer(SimManager.timer);
                         StartCoroutine(UpdateCasting(0f));
                     }
                     #endregion
 
                     else
                     {
-                        damage = myStats.eSkill.UseSkill(skillLevel, myStats, targetStats);
+                        damage = myStats.eSkill.UseSkill(skillLevel, myStats, targetStats, abilitySum[3], prevDamage);
                         StartCoroutine(UpdateCasting(myStats.eSkill.basic.castTime));
                     }
                 }
@@ -365,6 +375,9 @@ public class ChampCombat : MonoBehaviour
                 catch { }
                 #endregion
 
+                prevDamage = int.Parse(abilitySum[3].text);
+                //abilitySum[3].text = (prevDamage + damage).ToString();
+
                 if (myStats.passiveSkill.applyOnAbility)
                 {
                     passiveDamage = myStats.passiveSkill.UseSkill(myStats.level, myStats, targetStats);
@@ -378,7 +391,9 @@ public class ChampCombat : MonoBehaviour
                 if (myStats.status.silence || myStats.status.stun) yield break;
                 if (isCasting) yield break;
                 if (!myStats.rReady) yield break;
+                if (myStats.rSkill == null) yield break;
                 if (myStats.rSkill.basic.inactive) yield break;
+                prevDamage = int.Parse(abilitySum[4].text);
 
                 isCasting = true;
 
@@ -393,7 +408,7 @@ public class ChampCombat : MonoBehaviour
                             StartCoroutine(UpdateCasting(0f));
                             float timeToWait = myStats.rSkill.multihit.multiHitInterval;
                             if (targetStats.currentHealth <= 0) yield break;
-                            damage = myStats.rSkill.UseSkill(ultLevel, myStats, targetStats);
+                            damage = myStats.rSkill.UseSkill(ultLevel, myStats, targetStats,abilitySum[4], prevDamage);
                             if (targetStats.currentHealth-damage <= 0) yield break;
                             yield return new WaitForSeconds(timeToWait);
                         }
@@ -404,14 +419,14 @@ public class ChampCombat : MonoBehaviour
                         int bonusDamage = (int)Mathf.Round(300 + (myStats.AP * 30 / 100));
                         if (targetStats.currentHealth - bonusDamage <= 0) yield break;
                         output.text += "[SPECIAL] " + myStats.name + " Death's Daughter is triggered dealing " + bonusDamage.ToString() + " damage.\n\n";
-                        myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                        myStats.UpdateTimer(SimManager.timer);
                     }
                 }
 
                 #region Garen
                 if (myStats.name == "Garen")
                 {
-                    damage = myStats.rSkill.UseSkill(ultLevel, myStats, targetStats);
+                    damage = myStats.rSkill.UseSkill(ultLevel, myStats, targetStats, abilitySum[4], prevDamage);
                     if (myStats.name == "Garen" && damage < targetStats.currentHealth)
                     {
                         isCasting = false;
@@ -432,7 +447,7 @@ public class ChampCombat : MonoBehaviour
                     myStats.UpdateStats();
                     StartCoroutine(UpdateCasting(myStats.rSkill.basic.castTime));
                     output.text += "[BUFF] " + myStats.name + " gains " + bonusAD + " Bonus AD for 3 seconds.\n\n";
-                    myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    myStats.UpdateTimer(SimManager.timer);
                 }
                 #endregion
 
@@ -450,11 +465,11 @@ public class ChampCombat : MonoBehaviour
                     myStats.PercentLifeStealMod *= (int)Mathf.Round(1.55f);
                     myStats.UpdateStats();
                     output.text += "[SPECIAL] " + myStats.name + " used "+myStats.rSkill.basic.name+" and gains " + Mathf.Round(myStats.AD * 0.4f) + " bonus AD.\n\n";
-                    myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    myStats.UpdateTimer(SimManager.timer);
                     output.text += "[SPECIAL] " + myStats.name + " used " + myStats.rSkill.basic.name + " and gains " + Mathf.Round(myStats.PercentLifeStealMod * 0.55f) + "% bonus healing.\n\n";
-                    myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    myStats.UpdateTimer(SimManager.timer);
                     output.text += "[SPECIAL] " + myStats.name + " used " + myStats.rSkill.basic.name + " and fears the enemy for 3 seconds.\n\n";
-                    myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    myStats.UpdateTimer(SimManager.timer);
                     targetStats.status.silence = true;
                     targetStats.status.disarm = true;
                     targetStats.status.silenceDuration = 3f;
@@ -498,13 +513,16 @@ public class ChampCombat : MonoBehaviour
                 yield return new WaitForSeconds(myStats.rSkill.basic.castTime);
 
                 if (targetStats.currentHealth <= 0) yield break;
-                damage = myStats.rSkill.UseSkill(ultLevel, myStats, targetStats);
+                damage = myStats.rSkill.UseSkill(ultLevel, myStats, targetStats, abilitySum[4], prevDamage);
                 myStats.rReady = false;
                 if(myStats.name != "Akali")
                 {
                     myStats.rCD = myStats.rSkill.basic.coolDown[ultLevel];
                 }
                 generateJSON.SendData(false, this.gameObject.name, damage, SimManager.timer, 2, myStats.rSkill.name);
+
+                //prevDamage = int.Parse(abilitySum[4].text);
+                //abilitySum[4].text = (prevDamage + damage).ToString();
                 if (myStats.passiveSkill.applyOnAbility)
                 {
                     passiveDamage = myStats.passiveSkill.UseSkill(myStats.level, myStats, targetStats);
@@ -538,8 +556,20 @@ public class ChampCombat : MonoBehaviour
     public void Attack(ChampStats target, float amount)
     {
         myStats.qStacks++;
+        int prevDamage = int.Parse(damageSum.text);
+        damageSum.text = (prevDamage +amount).ToString();
+        myStats.totalDamage += + (int)amount;
+
+        //if (targetStats.currentHealth - damage <= 0)
+        //{
+        //    return;
+        //}
+        //if (myStats.currentHealth - damage <= 0)
+        //{ 
+        //    return;
+        //}
         target.TakeDamage(amount);
-        myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+        myStats.UpdateTimer(SimManager.timer);
         if (myStats.PercentLifeStealMod > 0)
         {
             float LSValue = amount * (myStats.PercentLifeStealMod / 100);
@@ -619,7 +649,7 @@ public class ChampCombat : MonoBehaviour
             {
                 damage = 0;
                 output.text += "[SPECIAL] " + targetStats.name + " evaded " + myStats.name + " attack.\n\n";
-                myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                myStats.UpdateTimer(SimManager.timer);
                 try
                 {
                     targetStats.dynamicStatusStacks["Counter Strike"]++;
@@ -648,9 +678,12 @@ public class ChampCombat : MonoBehaviour
                     myStats.dynamicStatusStacks[myStats.rSkill.name]++;
                     if (myStats.dynamicStatusStacks[myStats.rSkill.name] >= 2)
                     {
-                        myStats.dynamicStatusStacks[myStats.rSkill.name] = 0;
+
+                        int prevDamage = 0;
+                        myStats.dynamicStatusStacks[myStats.rSkill.name] = 0; 
+                        prevDamage = int.Parse(abilitySum[4].text);
                         int ultLevel = myStats.level / 6 - 1;
-                        myStats.rSkill.UseSkill(ultLevel, myStats, targetStats);
+                        myStats.rSkill.UseSkill(ultLevel, myStats, targetStats, abilitySum[4], prevDamage);
                         generateJSON.SendData(false, this.gameObject.name, damage, SimManager.timer, 2, myStats.rSkill.name);
                     }
                 }
@@ -689,23 +722,26 @@ public class ChampCombat : MonoBehaviour
         #endregion
 
         //if (targetStats.currentHealth-damage <= 0) return;
-        //if (myStats.currentHealth - damage <= 0) return;
+        if (myStats.currentHealth - damage <= 0) return;
         output.text += "[DAMAGE] " + this.gameObject.name + " used Auto Attack and dealt " + _damage.ToString() + " damage.\n\n";
         Attack(targetStats, damage);
 
 
         //Apply Passive
-        if (myStats.passiveSkill.applyOnAttack)
+        if (myStats.passiveSkill != null)
         {
-            if (!myStats.passiveSkill.inactive)
+            if (myStats.passiveSkill.applyOnAttack)
             {
-                if (myStats.passiveReady)
+                if (!myStats.passiveSkill.inactive)
                 {
-                    if (targetStats.currentHealth <= 0) return;
-                    myStats.passiveReady = false;
-                    myStats.pCD = myStats.passiveSkill.coolDown;
-                    int passiveDamage = myStats.passiveSkill.UseSkill(myStats.level, myStats, targetStats);
-                    generateJSON.SendData(false, this.gameObject.name, passiveDamage, SimManager.timer, 3, myStats.passiveSkill.name);
+                    if (myStats.passiveReady)
+                    {
+                        if (targetStats.currentHealth <= 0) return;
+                        myStats.passiveReady = false;
+                        myStats.pCD = myStats.passiveSkill.coolDown;
+                        int passiveDamage = myStats.passiveSkill.UseSkill(myStats.level, myStats, targetStats);
+                        generateJSON.SendData(false, this.gameObject.name, passiveDamage, SimManager.timer, 3, myStats.passiveSkill.name);
+                    }
                 }
             }
         }

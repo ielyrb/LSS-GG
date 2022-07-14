@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 
-
-
     public class ItemData
     {
         public string name { get; set; }

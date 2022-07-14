@@ -10,6 +10,9 @@ using System.Text;
 public class RiotAPIRequest : MonoBehaviour
 {
     public RiotAPIResponse champion;
+    public LSSAPIResponse LSSAPI;
+    SimManager simManager;
+    ChampionAPI myObj = new ChampionAPI();
 
     public Skills skills;
 
@@ -19,8 +22,7 @@ public class RiotAPIRequest : MonoBehaviour
     public int[] ExpTable = {0,280,660,1140,1720,2400,3180,4060,5040,6120,7300,8580,9960,11440,13020,14700,16480,18360};
     public int MaxLevel = 18;
 
-    private string apiURL1 = "";
-    private string apiURL2 = "";
+    private string apiURL = "";
     private string _champ1;
     private string _champ2;
     bool Load1, Load2;
@@ -51,17 +53,57 @@ public class RiotAPIRequest : MonoBehaviour
         Champions = GameObject.FindGameObjectsWithTag("Champion");
         itemRequest = GetComponent<RiotAPIItemRequest>();
         matchRequest = GetComponent<RiotAPIMatchRequest>();
-        Test();
+        simManager = GetComponent<SimManager>();
+        //Test();
     }
 
     public void Test()
     {
+        Time.timeScale = 100f;
+        simManager.timeText.gameObject.SetActive(false);
         string _c1 = dd1.captionText.text.ToString();
         string _c2 = dd2.captionText.text.ToString();
         int _e1 = int.Parse(if1.text);
         int _e2 = int.Parse(if2.text);
-        GetRiotAPIRequest("12.10.1", _c1, _c2, _e1, _e2);
-        //GetRiotAPIRequest("12.10.1", "Mordekaiser", "Fiora", 18360, 18360);
+        GetRiotAPIRequest("12.10.1", "Jinx", "Alistar", 18360, 18360);
+    }
+
+    public void ManualSimulate()
+    {
+        Time.timeScale = 1f;
+        SimManager.timer = 0;
+        SimManager._timer = 0;
+        simManager.ongoing = false;
+        simManager.timeText.gameObject.SetActive(true);
+        simManager.outputText.text = "";
+        simManager.timeText.text = "";
+        simManager.StartBattle();
+    }
+
+    public void LoadData(string data)
+    {
+        LoadingScreenHandler.Show();
+        simManager.timeText.gameObject.SetActive(false);
+        SimManager.timer = 0;
+        SimManager._timer = 0;
+        simManager.ongoing = false;
+        simManager.outputText.text = "";
+        simManager.timeText.text = "";
+        Time.timeScale = 100f;
+        LSSAPI = JsonConvert.DeserializeObject<LSSAPIResponse>(data);
+        _champ1 = LSSAPI.APIMatchInfo.championInfo[0].champName;
+        _champ2 = LSSAPI.APIMatchInfo.championInfo[1].champName;
+        int _exp1 = ExpTable[(LSSAPI.APIMatchInfo.championInfo[0].champLevel)-1];
+        int _exp2 = ExpTable[(LSSAPI.APIMatchInfo.championInfo[1].champLevel)-1];
+
+        champStats[0].GetComponent<ChampCombat>().PriorityList(_champ1);
+        champStats[1].GetComponent<ChampCombat>().PriorityList(_champ2);
+
+        apiURL = "https://lss-server-test.herokuapp.com/getSelectedChamps";
+
+        StartCoroutine(MakeRiotAPIRequest1(_champ1, _exp1));
+        StartCoroutine(MakeRiotAPIRequest2(_champ2, _exp2));
+
     }
 
     public void GetRiotAPIRequest(string ver, string champ1, string champ2, int exp1, int exp2)
@@ -75,9 +117,9 @@ public class RiotAPIRequest : MonoBehaviour
         champ1 = CapitalizeFirstLetter(champ1).Trim().Replace(" ","").Replace("\u200B","");
         champ2 = CapitalizeFirstLetter(champ2).Trim().Replace(" ","").Replace("\u200B","");
 
-        apiURL1 = "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/" + champ1 + ".json";
-        apiURL2 = "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions/" + champ2 + ".json";
+        apiURL = "https://lss-server-test.herokuapp.com/getSelectedChamps";
 
+<<<<<<< HEAD
         //StartCoroutine(MakeRiotAPIRequest1(champ1,exp1));
         //StartCoroutine(MakeRiotAPIRequest2(champ2,exp2));
         //LoadAllChampions();
@@ -115,79 +157,79 @@ public class RiotAPIRequest : MonoBehaviour
                 //allAbilities[_num].name[i] = champion.data.Champion.spells[i].name;
             }   
         }
+=======
+        StartCoroutine(MakeRiotAPIRequest1(champ1,exp1));
+        StartCoroutine(MakeRiotAPIRequest2(champ2,exp2));
+>>>>>>> a2e113094b5f3dfa8b497b0f75f5f5f58c5e6fa1
     }
 
     //Champion 1
     IEnumerator MakeRiotAPIRequest1(string name, int _exp) 
     {
-        UnityWebRequest unityWebRequest = UnityWebRequest.Get(apiURL1);
-        
-        yield return unityWebRequest.SendWebRequest();
+        myObj = new ChampionAPI();
+        myObj.namesArr.Add(name);
+        string jsonString = JsonUtility.ToJson(myObj);
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+        var formData = System.Text.Encoding.UTF8.GetBytes(jsonString);
+        WWW www = new WWW(apiURL, formData, postHeader);
+        yield return www;
+        champion = JsonConvert.DeserializeObject<RiotAPIResponse>(www.text);
+        Load1 = true;
 
-        if(unityWebRequest.result == UnityWebRequest.Result.ConnectionError || 
-            unityWebRequest.result == UnityWebRequest.Result.ProtocolError)
-        {
-            Debug.Log(unityWebRequest.result);            
-        }
-        else
-        {               
-            //string s = "data\":{\""+name+"\"";         
-            champion = JsonConvert.DeserializeObject<RiotAPIResponse>(unityWebRequest.downloadHandler.text);
-            Load1 = true;
-
-            SimulateFight(0, _champ1, _exp,0);
-        }
+        SimulateFight(0, _champ1, _exp,0);
     }
 
     //Champion 2
-    IEnumerator MakeRiotAPIRequest2(string name, int _exp) 
+    IEnumerator MakeRiotAPIRequest2(string name, int _exp)
     {
-        UnityWebRequest unityWebRequest = UnityWebRequest.Get(apiURL2); 
-        
-        yield return unityWebRequest.SendWebRequest();
+        myObj = new ChampionAPI();
+        myObj.namesArr.Add(name);
+        string jsonString = JsonUtility.ToJson(myObj);
+        Hashtable postHeader = new Hashtable();
+        postHeader.Add("Content-Type", "application/json");
+        var formData = System.Text.Encoding.UTF8.GetBytes(jsonString);
+        WWW www = new WWW(apiURL, formData, postHeader);
+        yield return www;
+        champion = JsonConvert.DeserializeObject<RiotAPIResponse>(www.text);
+        //Debug.Log(www.text);
+        Load2 = true;
 
-        if(unityWebRequest.result == UnityWebRequest.Result.ConnectionError || 
-            unityWebRequest.result == UnityWebRequest.Result.ProtocolError)
-        {
-
-        }
-        else
-        {
-            //string s = "data\":{\""+name+"\"";
-            champion = JsonConvert.DeserializeObject<RiotAPIResponse>(unityWebRequest.downloadHandler.text);
-            Load2 = true;
-
-            SimulateFight(1,_champ2,_exp,0);
-        }
+        SimulateFight(1, _champ2, _exp, 0);
     }
 
     public void SimulateFight(int num,string champName, int _exp, int _type)
     {
         ChampStats myStats = Champions[num].GetComponent<ChampStats>();
+        myStats.totalDamage = 0;
         //FOR TEST ONLY
         myStats.isLoaded = false;
         //
-        for (int i = 0; i < skills.qSkills.Count - 1; i++)
+        for (int i = 0; i < skills.qSkills.Count; i++)
         {
-            if (skills.qSkills[i].basic.champion == champName)
+            try
             {
-                champStats[num].qSkill = skills.qSkills[i];                
-            }
+                if (skills.qSkills[i].basic.champion.Replace(" ","") == champName)
+                {
+                    champStats[num].qSkill = skills.qSkills[i];
+                }
 
-            if (skills.wSkills[i].basic.champion == champName)
-            {
-                champStats[num].wSkill = skills.wSkills[i];
-            }
+                if (skills.wSkills[i].basic.champion.Replace(" ", "") == champName)
+                {
+                    champStats[num].wSkill = skills.wSkills[i];
+                }
 
-            if (skills.eSkills[i].basic.champion == champName)
-            {
-                champStats[num].eSkill = skills.eSkills[i];
-            }
+                if (skills.eSkills[i].basic.champion.Replace(" ", "") == champName)
+                {
+                    champStats[num].eSkill = skills.eSkills[i];
+                }
 
-            if (skills.rSkills[i].basic.champion == champName)
-            {
-                champStats[num].rSkill = skills.rSkills[i];
+                if (skills.rSkills[i].basic.champion.Replace(" ", "") == champName)
+                {
+                    champStats[num].rSkill = skills.rSkills[i];
+                }
             }
+            catch { Debug.Log("No Skill Yet"); }
         }
 
         //if (champStats[num].eSkill.chargeable)
@@ -198,10 +240,14 @@ public class RiotAPIRequest : MonoBehaviour
 
         for (int i = 0; i < skills.passives.Count; i++)
         {
-            if (skills.passives[i].championName == champName)
+            try
             {
-                champStats[num].passiveSkill = skills.passives[i];
+                if (skills.passives[i].championName.Replace(" ", "") == champName)
+                {
+                    champStats[num].passiveSkill = skills.passives[i];
+                }
             }
+            catch { Debug.Log("No Skill Yet"); }
         }
 
         if (myStats.isLoaded) return;
@@ -209,11 +255,11 @@ public class RiotAPIRequest : MonoBehaviour
         myStats.level = GetLevel(_exp);
         if(_type == 0)
         {
-            myStats.baseHealth = (float)champion.stats.health.flat;
-            myStats.baseAD = (float)champion.stats.attackDamage.flat;
-            myStats.baseArmor = (float)champion.stats.armor.flat;
-            myStats.baseSpellBlock = (float)(champion.stats.magicResistance.flat);
-            myStats.baseAttackSpeed = (float)champion.stats.attackSpeed.flat;
+            myStats.baseHealth = (float)champion.ChampionsRes[0].champData.data.Champion.stats.hp;
+            myStats.baseAD = (float)champion.ChampionsRes[0].champData.data.Champion.stats.attackdamage;
+            myStats.baseArmor = (float)champion.ChampionsRes[0].champData.data.Champion.stats.armor;
+            myStats.baseSpellBlock = (float)(champion.ChampionsRes[0].champData.data.Champion.stats.spellblock);
+            myStats.baseAttackSpeed = (float)champion.ChampionsRes[0].champData.data.Champion.stats.attackspeed;
 
             myStats.maxHealth = myStats.baseHealth;
             myStats.AD = myStats.baseAD;
@@ -231,11 +277,11 @@ public class RiotAPIRequest : MonoBehaviour
         }
         else if(_type == 0 || _type == 2)
         {
-            myStats.maxHealth = (float)champion.stats.health.flat;
-            myStats.AD = (float)champion.stats.attackDamage.flat;
-            myStats.armor = (float)champion.stats.armor.flat;
-            myStats.spellBlock = (float)(champion.stats.magicResistance.flat);
-            myStats.attackSpeed = (float)champion.stats.attackSpeed.flat;
+            myStats.maxHealth = (float)champion.ChampionsRes[0].champData.data.Champion.stats.hp;
+            myStats.AD = (float)champion.ChampionsRes[0].champData.data.Champion.stats.attackdamage;
+            myStats.armor = (float)champion.ChampionsRes[0].champData.data.Champion.stats.armor;
+            myStats.spellBlock = (float)(champion.ChampionsRes[0].champData.data.Champion.stats.spellblock);
+            myStats.attackSpeed = (float)champion.ChampionsRes[0].champData.data.Champion.stats.attackspeed;
         }
 
         GetStatsByLevel(myStats);
@@ -303,7 +349,7 @@ public class RiotAPIRequest : MonoBehaviour
                     itemRequest.FetchStats(1,i2,champStats[1],i,champ2Items[i2]);
                 }
             }
-        }
+        } 
     }
 
     int GetLevel(int _exp)
@@ -325,11 +371,11 @@ public class RiotAPIRequest : MonoBehaviour
 
         double[] mFactor ={0, 0.72, 1.4750575, 2.2650575, 3.09, 3.95, 4.8450575, 5.7750575, 6.74, 7.74, 8.7750575, 9.8450575, 10.95, 12.09, 13.2650575, 14.4750575, 15.72, 17};
         if(_level == 1) return;
-        myStats.maxHealth += (float)(champion.stats.health.perLevel * mFactor[_level-1]);
-        myStats.attackSpeed = (float)(myStats.baseAttackSpeed * (1 + (champion.stats.attackSpeed.perLevel * (_level - 1)) / 100));
-        myStats.armor += ((float) (champion.stats.armor.perLevel) * (float)  mFactor[_level-1]);
-        myStats.AD += ((float)  (champion.stats.attackDamage.perLevel) * (float)  mFactor[_level-1]);
-        myStats.spellBlock += ((float)  (champion.stats.magicResistance.perLevel) * (float)  mFactor[_level-1]);
+        myStats.maxHealth += (float)(champion.ChampionsRes[0].champData.data.Champion.stats.hpperlevel * mFactor[_level-1]);
+        myStats.attackSpeed = (float)(myStats.baseAttackSpeed * (1 + (champion.ChampionsRes[0].champData.data.Champion.stats.attackspeedperlevel * (_level - 1)) / 100));
+        myStats.armor += ((float) (champion.ChampionsRes[0].champData.data.Champion.stats.armorperlevel) * (float)  mFactor[_level-1]);
+        myStats.AD += ((float)  (champion.ChampionsRes[0].champData.data.Champion.stats.attackdamageperlevel) * (float)  mFactor[_level-1]);
+        myStats.spellBlock += ((float)  (champion.ChampionsRes[0].champData.data.Champion.stats.spellblockperlevel) * (float)  mFactor[_level-1]);
     }
 
     public static string ucfirst(string s)
@@ -394,4 +440,9 @@ public class ChampionAbilities
 public class AllAbilities
 {
     public string[] name;
+}
+
+public class ChampionAPI
+{
+    public List<string> namesArr = new List<string>();
 }

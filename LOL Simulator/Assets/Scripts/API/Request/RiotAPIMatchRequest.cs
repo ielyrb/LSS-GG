@@ -264,7 +264,7 @@ public class RiotAPIMatchRequest : MonoBehaviour
         }
         champStats[0].FinalizeStats();
         champStats[1].FinalizeStats();
-        apiRequest.GetRiotAPIRequest(ver, champName[0], champName[1], champExp[0], champExp[1]);
+        //apiRequest.GetRiotAPIRequest(ver, champName[0], champName[1], champExp[0], champExp[1]);
         StartCoroutine(GetTimelineData(_matchID));
     }
 

@@ -3,200 +3,233 @@
   "fightData": {
     "autoAttackData": [
       {
-        "champName": "Ashe",
-        "value": -41,
-        "time": "0.104"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "0.178"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "0.149"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "0.178"
       },
       {
-        "champName": "Ashe",
-        "value": -41,
-        "time": "1.179"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "0.778"
       },
       {
-        "champName": "Ashe",
-        "value": -41,
-        "time": "2.253"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "0.778"
       },
       {
-        "champName": "Ashe",
-        "value": -41,
-        "time": "3.422"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "1.823"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "3.430"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "1.823"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "4.520"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "2.863"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "5.614"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "2.863"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "6.707"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "3.904"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "7.799"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "3.904"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "8.890"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "4.945"
       },
       {
-        "champName": "Ashe",
-        "value": -41,
-        "time": "9.122"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "4.945"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "9.981"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "5.987"
       },
       {
-        "champName": "Ashe",
-        "value": -41,
-        "time": "10.198"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "5.987"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "11.071"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "7.028"
       },
       {
-        "champName": "Ashe",
-        "value": -41,
-        "time": "11.274"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "7.028"
       },
       {
-        "champName": "Garen",
-        "value": 38,
-        "time": "12.162"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "8.069"
       },
       {
-        "champName": "Ashe",
-        "value": -41,
-        "time": "12.349"
+        "champName": "Fiora",
+        "value": 11,
+        "time": "8.069"
+      },
+      {
+        "champName": "Fiora",
+        "value": 11,
+        "time": "8.666"
+      },
+      {
+        "champName": "Fiora",
+        "value": 11,
+        "time": "8.666"
+      },
+      {
+        "champName": "Fiora",
+        "value": 11,
+        "time": "9.708"
       }
     ],
     "spellData": [
       {
-        "champName": "Garen",
-        "spellName": "Garen W",
+        "champName": "Fiora",
+        "spellName": "Fiora Q",
+        "value": 52,
+        "time": "0.031"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora Q",
+        "value": 52,
+        "time": "0.031"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora W",
         "value": 0,
-        "time": "0.022"
+        "time": "0.046"
       },
       {
-        "champName": "Garen",
-        "spellName": "Garen Q",
-        "value": 108,
-        "time": "0.045"
+        "champName": "Fiora",
+        "spellName": "Fiora W",
+        "value": 0,
+        "time": "0.046"
       },
       {
-        "champName": "Ashe",
-        "spellName": "Ashe W",
-        "value": 75,
-        "time": "1.795"
+        "champName": "Fiora",
+        "spellName": "Fiora E",
+        "value": 0,
+        "time": "0.058"
       },
       {
-        "champName": "Ashe",
-        "spellName": "Ashe R",
-        "value": 304,
-        "time": "1.821"
+        "champName": "Fiora",
+        "spellName": "Fiora E",
+        "value": 0,
+        "time": "0.058"
       },
       {
-        "champName": "Garen",
-        "spellName": "Garen E",
-        "value": 127,
-        "time": "3.162"
+        "champName": "Fiora",
+        "spellName": "Fiora Q",
+        "value": 52,
+        "time": "6.034"
       },
       {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "4.202"
+        "champName": "Fiora",
+        "spellName": "Fiora Q",
+        "value": 52,
+        "time": "6.034"
       },
       {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "4.964"
+        "champName": "Fiora",
+        "spellName": "Fiora E",
+        "value": 0,
+        "time": "7.062"
       },
       {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "5.730"
+        "champName": "Fiora",
+        "spellName": "Fiora E",
+        "value": 0,
+        "time": "7.062"
       },
       {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "6.509"
-      },
-      {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "7.278"
-      },
-      {
-        "champName": "Garen",
-        "spellName": "Garen Q",
-        "value": 108,
-        "time": "8.047"
-      },
-      {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "8.047"
-      },
-      {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "13.175"
-      },
-      {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "13.983"
-      },
-      {
-        "champName": "Ashe",
-        "spellName": "Ashe Q",
-        "value": 11,
-        "time": "14.804"
-      },
-      {
-        "champName": "Garen",
-        "spellName": "Garen E",
-        "value": 42,
-        "time": "15.225"
+        "champName": "Fiora",
+        "spellName": "Fiora Q",
+        "value": 52,
+        "time": "12.064"
       }
     ],
     "passiveData": [
       {
-        "champName": "Ashe",
-        "spellName": "Ashe",
-        "value": 0,
-        "time": "0.104"
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "0.031"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "0.031"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "0.046"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "0.046"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "0.178"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "0.178"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "6.034"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "6.034"
+      },
+      {
+        "champName": "Fiora",
+        "spellName": "Fiora",
+        "value": 196,
+        "time": "12.064"
       }
     ]
   }
