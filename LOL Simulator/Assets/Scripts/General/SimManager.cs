@@ -10,7 +10,7 @@ public class SimManager : MonoBehaviour
     public static bool isLoaded = false;
     public static bool battleStarted = false;
     public static float timer;
-    public static float speed = 1f;
+    public static float _timer;
   
     public bool ongoing;
     public RiotAPIRequest riotAPI;
@@ -24,7 +24,6 @@ public class SimManager : MonoBehaviour
     public Button startBtn;
     public Button loadBtn;
     public Button resetBtn;
-    public GameObject inputUI;
     public GameObject outputUI;
     public ChampStats[] champStats;
     public GameObject matchIDGO;
@@ -34,7 +33,9 @@ public class SimManager : MonoBehaviour
     public GameObject champSelectGO;
     public GameObject sliderGO;
     public GameObject sliderParent;
-    //public GameObject
+    public GameObject[] champOutput;
+    public GameObject[] champOutput1;
+    public TextMeshProUGUI timerTest;
 
     RiotAPIItemRequest itemRequest;
     RiotAPIItemResponse itemResponse;    
@@ -80,8 +81,8 @@ public class SimManager : MonoBehaviour
         storedXP[0] = xp;
         storedName[0] = name;
         champStats[0].Reset(0);
-        apiRequest.GetRiotAPIRequest("12.10.1", storedName[0], storedName[1], storedXP[0], storedXP[1]);
-        Debug.Log(storedName[0]);
+        //apiRequest.GetRiotAPIRequest("12.10.1", storedName[0], storedName[1], storedXP[0], storedXP[1]);
+        //Debug.Log(storedName[0]);
         //apiRequest.SimulateFight(0, name, xp,1);
         for (int i = 0; i<4; i++)
         {
@@ -100,7 +101,7 @@ public class SimManager : MonoBehaviour
         storedXP[1] = xp;
         storedName[1] = name;
         champStats[1].Reset(0);
-        apiRequest.GetRiotAPIRequest("12.10.1", storedName[0], storedName[1], storedXP[0], storedXP[1]);
+        //apiRequest.GetRiotAPIRequest("12.10.1", storedName[0], storedName[1], storedXP[0], storedXP[1]);
         //apiRequest.SimulateFight(1, name, xp,1);
         for(int i = 0; i<4; i++)
         {
@@ -130,6 +131,11 @@ public class SimManager : MonoBehaviour
         itemRequest = GetComponent<RiotAPIItemRequest>();
         matchRequest = GetComponent<RiotAPIMatchRequest>();
         apiRequest = GetComponent<RiotAPIRequest>();
+        //Time.timeScale = speed;
+        //foreach (GameObject item in champOutput)
+        //{
+        //    item.SetActive(false);
+        //}
     }
 
     public void ShowMatches(int num)
@@ -147,7 +153,9 @@ public class SimManager : MonoBehaviour
         {
             if(!ongoing)
             {
-                startBtn.interactable = true;
+                //startBtn.interactable = true;
+                StartBattle();
+                //StartCoroutine(StartingBattle());
             }
             else
             {
@@ -155,10 +163,22 @@ public class SimManager : MonoBehaviour
             }
         }
 
-
-        if(!battleStarted) return;
-        timer += Time.deltaTime;
-        //timer *= speed;
+        if (battleStarted)
+        {
+            _timer += Time.unscaledDeltaTime;
+            timer = _timer * Time.timeScale;
+            timerTest.text = timer.ToString();
+            //Debug.Log(timerTest.text);
+        }
+        else
+        {
+            if (isNew)
+            {
+                timer = 0;
+                battleStarted = false;
+            }
+        }
+        //Debug.Log(isLoaded);
     }
     
     public void StartBattle()
@@ -168,7 +188,6 @@ public class SimManager : MonoBehaviour
         loadBtn.interactable = false;
         resetBtn.interactable = true;
         battleStarted = true;
-        //isNew = false;
     }
 
     public void Clear()
@@ -181,9 +200,11 @@ public class SimManager : MonoBehaviour
 
     public void Reset()
     {
-        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
+        Scene scene = SceneManager.GetActiveScene(); 
+        SceneManager.LoadScene(scene.name);
         isLoaded = false;
         battleStarted = false;
+        timer = 0;
         RiotAPIMatchRequest.selectedChamp[0] = 0;
         RiotAPIMatchRequest.selectedChamp[1] = 0;
     }
@@ -191,7 +212,7 @@ public class SimManager : MonoBehaviour
     void ShowInput()
     {
         OutputField.SetActive(false);
-        InputField.SetActive(true);
+        //InputField.SetActive(true);
     }   
 
     void ShowOutput()

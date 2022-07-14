@@ -5,7 +5,8 @@ using TMPro;
 
 public class ChampStats : MonoBehaviour
 {
-    public new string name;
+    public ExternalJS exportJS;
+    public string name;
 
     public PassiveList passiveSkill;
     public SkillList qSkill;
@@ -24,6 +25,7 @@ public class ChampStats : MonoBehaviour
     public bool buffed;
     public bool debuffed;
     public bool ccImmune;
+    public int totalDamage;
 
     public float shieldValue;
     public float shieldDuration;
@@ -31,7 +33,8 @@ public class ChampStats : MonoBehaviour
     public List<SpellInfo> spellInfo = new List<SpellInfo>();
     public bool qReady = true, wReady = true, eReady = true, rReady = true, passiveReady = true;
     public float qCD, wCD, eCD, rCD, pCD;
-    public TextMeshProUGUI[] outputStats;
+    [HideInInspector] public TextMeshProUGUI[] outputStats;
+    public TextMeshProUGUI[] outputStats1;
     [HideInInspector] public List<Item> item;
     [HideInInspector] public GameObject itemList;
     [HideInInspector] public GameObject itemPrefab;
@@ -151,7 +154,7 @@ public class ChampStats : MonoBehaviour
         {
             if (isDead) return;
             Die();
-            generateJSON.DataSerialize();
+            //generateJSON.DataSerialize();
         }
 
         if (currentTarget != null)
@@ -167,7 +170,9 @@ public class ChampStats : MonoBehaviour
             {
                 int totalDamage = (int)Mathf.Round((eSkill.damage.flatAD[4] + (AD * (eSkill.damage.percentAD[4] / 100))));
                 totalDamage = (int)Mathf.Round(totalDamage * (100 / (100 + currentTarget.gameObject.GetComponent<ChampStats>().armor)));
-                eSkill.UseSkill(4, this, currentTarget.gameObject.GetComponent<ChampStats>());
+                int _prev = int.Parse(this.gameObject.GetComponent<ChampCombat>().abilitySum[3].text);
+                TextMeshProUGUI s = this.gameObject.GetComponent<ChampCombat>().abilitySum[3];
+                eSkill.UseSkill(4, this, currentTarget.gameObject.GetComponent<ChampStats>(),s,_prev);
                 dynamicStatus.Remove("Counter Strike");
                 dynamicStatusStacks.Remove("Counter Strike");
                 dynamicStatusDuration.Remove("Counter Strike");
@@ -208,65 +213,69 @@ public class ChampStats : MonoBehaviour
         #endregion
 
         #region Ability Cool Down
-        if (qCD > 0)
+        try
         {
-            qCD -= Time.deltaTime;
-            if (qCD <= 0)
+            if (qCD > 0)
             {
-                qReady = true;
-            }
-        }
-
-        if (wCD > 0)
-        {
-            wCD -= Time.deltaTime;
-            if (wCD <= 0)
-            {
-                wReady = true;
-            }
-        }
-
-        if (eSkill.charge.chargeable)
-        {
-            if (eSkill.charge.charges > 0)
-            {
-                eReady = true;
-            }
-        }
-
-        if (eCD > 0)
-        {
-            eCD -= Time.deltaTime;
-            if (eCD <= 0)
-            {
-                eReady = true;
-                if (eSkill.charge.chargeable)
+                qCD -= Time.deltaTime;
+                if (qCD <= 0)
                 {
-                    if (eSkill.charge.charges < eSkill.charge.maxCharges[4])
+                    qReady = true;
+                }
+            }
+
+            if (wCD > 0)
+            {
+                wCD -= Time.deltaTime;
+                if (wCD <= 0)
+                {
+                    wReady = true;
+                }
+            }
+
+            if (eSkill.charge.chargeable)
+            {
+                if (eSkill.charge.charges > 0)
+                {
+                    eReady = true;
+                }
+            }
+
+            if (eCD > 0)
+            {
+                eCD -= Time.deltaTime;
+                if (eCD <= 0)
+                {
+                    eReady = true;
+                    if (eSkill.charge.chargeable)
                     {
-                        eSkill.charge.charges++;
+                        if (eSkill.charge.charges < eSkill.charge.maxCharges[4])
+                        {
+                            eSkill.charge.charges++;
+                        }
                     }
                 }
             }
-        }
 
-        if (rCD > 0)
-        {
-            rCD -= Time.deltaTime;
-            if (rCD <= 0)
+            if (rCD > 0)
             {
-                rReady = true;
+                rCD -= Time.deltaTime;
+                if (rCD <= 0)
+                {
+                    rReady = true;
+                }
+            }
+
+            if (pCD > 0)
+            {
+                pCD -= Time.deltaTime;
+                if (pCD <= 0)
+                {
+                    passiveReady = true;
+                }
             }
         }
-
-        if (pCD > 0)
-        {
-            pCD -= Time.deltaTime;
-            if (pCD <= 0)
-            {
-                passiveReady = true;
-            }
-        }
+        catch { }
 
         #endregion
 
@@ -279,7 +288,7 @@ public class ChampStats : MonoBehaviour
             {
                 shieldValue = 0;
                 output.text += name + " shield has expired \n\n";
-                UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                UpdateTimer(SimManager.timer);
             }
         }
         if (status.stun)
@@ -379,15 +388,15 @@ public class ChampStats : MonoBehaviour
                     shieldValue = 0;
                     shieldDuration = 0.001f;
                     output.text += "[DAMAGE] " + name + " shield absorbed " + previousValue + " damage from " + currentTarget.GetComponent<ChampStats>().name + " \n\n";
-                    UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    UpdateTimer(SimManager.timer);
                     output.text += "[DAMAGE] " + name + " took " + (amount- previousValue).ToString() + " damage from " + currentTarget.GetComponent<ChampStats>().name + " \n\n";
-                    UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    UpdateTimer(SimManager.timer);
                     amount = previousValue;
                 }
                 else
                 {
                     output.text += "[DAMAGE] " + name + " shield absorbed " + absorbed + " damage from " + currentTarget.GetComponent<ChampStats>().name + " \n\n";
-                    UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    UpdateTimer(SimManager.timer);
                     amount -= absorbed;
                 }
             }
@@ -427,15 +436,33 @@ public class ChampStats : MonoBehaviour
     public void UpdateStats()
     {
         this.gameObject.name = name;
-        outputStats[0].text = name;
-        outputStats[1].text = level.ToString("F0");
-        outputStats[2].text = maxHealth.ToString("F0");
-        outputStats[3].text = currentHealth.ToString("F0");
-        outputStats[4].text = AD.ToString("F0");
-        outputStats[5].text = AP.ToString("F0");
-        outputStats[6].text = armor.ToString("F0");
-        outputStats[7].text = spellBlock.ToString("F0");
-        outputStats[8].text = attackSpeed.ToString("F2");
+        outputStats1[0].text = name;
+        outputStats1[1].text = level.ToString("F0");
+        outputStats1[2].text = maxHealth.ToString("F0");
+        outputStats1[3].text = currentHealth.ToString("F0");
+        string s = "";
+        int i = 0;
+        foreach (string item in champCombat.combatPriority)
+        {
+            i++;
+            if (i == champCombat.combatPriority.Length)
+            {
+                s += item;
+            }
+            else
+            {
+                s += item + ",";
+            }
+        }
+        outputStats1[4].text = s;
+        //outputStats[0].text = name;
+        //outputStats[1].text = level.ToString("F0");
+        //outputStats[2].text = maxHealth.ToString("F0");
+        //outputStats[3].text = AD.ToString("F0");
+        //outputStats[4].text = AP.ToString("F0");
+        //outputStats[5].text = armor.ToString("F0");
+        //outputStats[6].text = spellBlock.ToString("F0");
+        //outputStats[7].text = attackSpeed.ToString("F2");
     }
 
     void GetTarget()
@@ -459,17 +486,23 @@ public class ChampStats : MonoBehaviour
 
     void Die()
     {
-        timer.text += SimManager.timer.ToString("F3");
-        output.text += currentTarget.gameObject.name + " has won with " + currentTarget.gameObject.GetComponent<ChampStats>().currentHealth + " health remaining.\n\n";
-        currentHealth = 0;
+        ExportJSData exportData = new ExportJSData();
         isDead = true;
         SimManager.battleStarted = false;
-        SimManager.isNew = true;        
+        SimManager.isNew = true;
+        SimManager.isLoaded = false;
+        currentHealth = 0;
+        UpdateTimer(SimManager.timer);
+        output.text += currentTarget.gameObject.name + " has won with " + currentTarget.gameObject.GetComponent<ChampStats>().currentHealth + " health remaining.\n\n";
+        exportData.myDamage = totalDamage;
+        exportData.enemyDamage = currentTarget.gameObject.GetComponent<ChampStats>().totalDamage;
+        exportJS.SendData(JsonUtility.ToJson(exportData));
+        LoadingScreenHandler.Hide();
     }
 
-    public void UpdateTimer(string time)
-    {        
-        timer.text += time + "\n \n";
+    public void UpdateTimer(float time)
+    {
+        timer.text += SimManager._timer.ToString("F2") + "\n \n";
     }
 
     public void FinalizeStats()
@@ -603,6 +636,13 @@ public class ChampStats : MonoBehaviour
         public string name;
         public double[] cooldown;
         public double[] damage;
+    }
+
+    class ExportJSData
+    { 
+        public int myDamage = 0;
+        public int enemyDamage = 0;
+        public int time = 0;
     }
 
 }

@@ -45,7 +45,7 @@ public class SkillList : ScriptableObject
     }
     #endregion
 
-    public int UseSkill(int level, ChampStats myStats, ChampStats target)
+    public int UseSkill(int level, ChampStats myStats, ChampStats target, TextMeshProUGUI text, int prevDamage)
     {
         output = GameObject.FindGameObjectWithTag("Output Content").GetComponent<TextMeshProUGUI>();
         int totalDamage = 0;
@@ -121,7 +121,7 @@ public class SkillList : ScriptableObject
                     myStats.attackSpeed *= (1 + (myStats.PercentAttackSpeedMod / 100));
                     myStats.UpdateStats();
                     output.text += "[BUFF] " + myStats.name + " gains 90% AS increase for 2 attacks.\n\n";
-                    myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                    myStats.UpdateTimer(SimManager.timer);
                     myStats.buffed = true;
                 }
             }
@@ -157,7 +157,7 @@ public class SkillList : ScriptableObject
                 amount += (int)Mathf.Round((myStats.maxHealth - myStats.currentHealth) * (13 / 100));
                 myStats.currentHealth += amount;
                 output.text += "[HEAL] " + myStats.name + " used " + basic.name + " and heals himself for " + heal + " health.\n\n";
-                myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                myStats.UpdateTimer(SimManager.timer);
                 myStats.UpdateStats();
             }
 
@@ -179,7 +179,7 @@ public class SkillList : ScriptableObject
             myStats.AD += bonusAD;
             myStats.UpdateStats();
             output.text += "[SPECIAL] " + myStats.name + " used " + basic.name + " and gains " + bonusAD + " bonus AD.\n\n";
-            myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+            myStats.UpdateTimer(SimManager.timer);
             myStats.dynamicStatus[basic.name] = true;
             myStats.dynamicStatusDuration[basic.name] = 15;
             int missingHealth = (int)Mathf.Round(100-((myStats.currentHealth / myStats.maxHealth) * 100));
@@ -265,10 +265,12 @@ public class SkillList : ScriptableObject
             output.text += "[DAMAGE] " + myStats.name + " used " + basic.name + " and dealt " + totalDamage.ToString() + " damage.\n\n";
         }
         target.TakeDamage(totalDamage);
-        myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+        myStats.UpdateTimer(SimManager.timer);
 
         SelfEffects(level, myStats);
         EnemyEffects(level,target);
+        text.text = (prevDamage + totalDamage).ToString();
+        myStats.totalDamage += totalDamage;
         return totalDamage;
     }
 
@@ -281,7 +283,7 @@ public class SkillList : ScriptableObject
                 target.status.stun = true;
                 target.status.stunDuration = enemyEffects.stunDuration;
                 output.text += "[DEBUFF] " + target.name + " is stunned for " + enemyEffects.stunDuration + " seconds.\n\n";
-                target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+                target.UpdateTimer(SimManager.timer);
             }
         }
 
@@ -290,7 +292,7 @@ public class SkillList : ScriptableObject
             target.status.silence = true;
             target.status.silenceDuration = enemyEffects.silenceDuration;
             output.text += "[DEBUFF] " + target.name + " is silenced for "+enemyEffects.silenceDuration+" seconds.\n\n";
-            target.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+            target.UpdateTimer(SimManager.timer);
         }
 
         if (enemyEffects.disarm)
@@ -318,7 +320,7 @@ public class SkillList : ScriptableObject
             myStats.buffed = true;
             myStats.ModifyAS(selfEffects.ASIncreaseDuration[level], selfEffects.ASIncreasePercent[level]);
             output.text += "[BUFF] " + myStats.name + " gains " + selfEffects.ASIncreasePercent[level] + "% for "+selfEffects.ASIncreaseDuration[level] + " seconds.\n\n";
-            myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+            myStats.UpdateTimer(SimManager.timer);
         }
         #endregion
 
@@ -338,7 +340,7 @@ public class SkillList : ScriptableObject
             myStats.status.damageReducFlat = selfEffects.DamageRedFlat[level];
             myStats.status.damageReducDuration = selfEffects.DamageRedDuration[level];
             output.text += "[BUFF] " + myStats.name + " gains " + selfEffects.DamageRedPercent[level] + "% for " + selfEffects.DamageRedDuration[level] + " seconds.\n\n";
-            myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+            myStats.UpdateTimer(SimManager.timer);
         }
         #endregion
 
@@ -351,7 +353,7 @@ public class SkillList : ScriptableObject
             myStats.shieldValue = shieldValue;
             myStats.shieldDuration = selfEffects.ShieldDuration[level];
             output.text += "[BUFF] " + myStats.name + " gains " + shieldValue + " shield for " + selfEffects.ShieldDuration[level] + " seconds.\n\n";
-            myStats.UpdateTimer(SimManager.timer.ToString("F3").Replace('.', ':'));
+            myStats.UpdateTimer(SimManager.timer);
         }
         #endregion
     }
