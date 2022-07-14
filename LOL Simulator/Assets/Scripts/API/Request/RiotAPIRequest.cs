@@ -167,11 +167,11 @@ public class RiotAPIRequest : MonoBehaviour
         //FOR TEST ONLY
         myStats.isLoaded = false;
         //
-        for (int i = 0; i < skills.qSkills.Count; i++)
+        for (int i = 0; i < skills.qSkills.Count - 1; i++)
         {
             if (skills.qSkills[i].basic.champion == champName)
             {
-                champStats[num].qSkill = skills.qSkills[i];
+                champStats[num].qSkill = skills.qSkills[i];                
             }
 
             if (skills.wSkills[i].basic.champion == champName)

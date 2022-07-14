@@ -11,7 +11,7 @@ public class Abilities
 
 public class AcquisitionRadius
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
@@ -51,7 +51,7 @@ public class AramShielding
 
 public class Armor
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
@@ -67,7 +67,7 @@ public class AttackCastTime
 
 public class AttackDamage
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
@@ -83,9 +83,9 @@ public class AttackDelayOffset
 
 public class AttackRange
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
-    public int perLevel { get; set; }
+    public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
 }
 
@@ -150,7 +150,7 @@ public class Cost
 
 public class CriticalStrikeDamage
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
@@ -205,12 +205,12 @@ public class E
 public class Effect
 {
     public string description { get; set; }
-    public List<object> leveling { get; set; }
+    public List<Leveling> leveling { get; set; }
 }
 
 public class GameplayRadius
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
@@ -218,9 +218,9 @@ public class GameplayRadius
 
 public class Health
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
-    public int perLevel { get; set; }
+    public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
 }
 
@@ -240,7 +240,7 @@ public class Leveling
 
 public class MagicResistance
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
@@ -248,9 +248,9 @@ public class MagicResistance
 
 public class Mana
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
-    public int perLevel { get; set; }
+    public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
 }
 
@@ -270,7 +270,7 @@ public class Modifier
 
 public class Movespeed
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
@@ -282,7 +282,7 @@ public class P
     public string icon { get; set; }
     public List<Effect> effects { get; set; }
     public object cost { get; set; }
-    public object cooldown { get; set; }
+    public Cooldown cooldown { get; set; }
     public string targeting { get; set; }
     public string affects { get; set; }
     public string spellshieldable { get; set; }
@@ -310,7 +310,7 @@ public class P
 
 public class PathingRadius
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
@@ -329,7 +329,7 @@ public class Q
     public string icon { get; set; }
     public List<Effect> effects { get; set; }
     public Cost cost { get; set; }
-    public object cooldown { get; set; }
+    public Cooldown cooldown { get; set; }
     public string targeting { get; set; }
     public string affects { get; set; }
     public string spellshieldable { get; set; }
@@ -418,7 +418,7 @@ public class RiotAPIResponse
 
 public class SelectionRadius
 {
-    public int flat { get; set; }
+    public double flat { get; set; }
     public double percent { get; set; }
     public double perLevel { get; set; }
     public double percentPerLevel { get; set; }
