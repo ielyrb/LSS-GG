@@ -48,25 +48,23 @@ public class ChampionDataManager : MonoBehaviour
     void SetChampionData()
     {
         var abilities = championDataResponse.abilities;
-        string s = "Q"; 
-        //var effectInAbilities = abilities.Q[0].effects;
-        var effectInAbilities = abilities[s].effects;
+        var effectInAbilities = abilities.Q[0].effects;
 
         for (int effect = 0; effect < effectInAbilities.Count; effect++)
         {
             for(int i = 0; i < 5; i++)
             {           
                 // Basic
-                if (abilities[s].castTime != "none")
-                    skills.qSkills[^1].basic.castTime = float.Parse(abilities[s].castTime);
+                if (abilities.Q[0].castTime != "none")
+                    skills.qSkills[^1].basic.castTime = float.Parse(abilities.Q[0].castTime);
 
-                if (abilities[s].cost != null)
-                    skills.qSkills[^1].basic.cost[i] = (float)abilities[s].cost.modifiers[0].values[i];
+                if (abilities.Q[0].cost != null)
+                    skills.qSkills[^1].basic.cost[i] = (float)abilities.Q[0].cost.modifiers[0].values[i];
                 else
                     skills.qSkills[^1].basic.cost[i] = 0;
 
-                skills.qSkills[^1].basic.name = abilities[s].name;
-                skills.qSkills[^1].basic.coolDown[i] = (float)abilities[s].cooldown.modifiers[0].values[i];
+                skills.qSkills[^1].basic.name = abilities.Q[0].name;
+                skills.qSkills[^1].basic.coolDown[i] = (float)abilities.Q[0].cooldown.modifiers[0].values[i];
 
                 // Damage
                 // Effect need loop
